@@ -39,7 +39,7 @@
 .card .face.front-face .name {
   letter-spacing: 2px;
 }
-.card .face.front-face .designation {
+.card .face.front-face .technics {
   font-size: 0.8rem;
   color: #3c5264;
   letter-spacing: 0.8px;
@@ -50,7 +50,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #c4c7ca;
+  background: #cacdcf;
   transform: rotateY(180deg);
   padding: 20px 30px;
   -webkit-user-select: none;
@@ -61,13 +61,11 @@
   position: absolute;
   top: 25px;
   left: 25px;
-  font-size: 1.2rem;
 }
 .card .face.back-face .fa-quote-right {
   position: absolute;
   bottom: 35px;
   right: 25px;
-  font-size: 1.2rem;
 }
 
 .card:hover .face.front-face {
