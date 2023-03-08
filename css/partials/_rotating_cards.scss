@@ -1,0 +1,96 @@
+$background: #cacdcf;
+
+.card {
+	width: 300px;
+	height: 300px;
+	transform-style: preserve-3d;
+	perspective: 500px;
+	border: none;
+	background-color: inherit;
+
+	// :hover .face.front-face {
+	// 	transform: rotateY(180deg);
+	// }
+
+	// :hover .face.back-face {
+	// 	transform: rotateY(360deg);
+	// }
+
+	.face {
+		position: absolute;
+		color: #0c2c44;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		box-shadow: 0 15px 35px gray;
+		border-radius: 15px;
+		background: $background;
+		transform-style: preserve-3d;
+		transition: 0.5s;
+		backface-visibility: hidden;
+		border-top: 1px solid #ddd;
+		border-left: 1px solid #ddd;
+	}
+
+	.face.front-face {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.profile {
+			width: 75%;
+			height: 150px;
+			border-radius: 2%;
+			object-fit: cover;
+		}
+
+		.name {
+			letter-spacing: 2px;
+		}
+
+		.designation {
+			font-size: 0.8rem;
+			color: #3c5264;
+			letter-spacing: 0.8px;
+		}
+	}
+
+	.face.back-face {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		// position: absolute;
+		background: #c4c7ca;
+		transform: rotateY(180deg);
+		padding: 20px 30px;
+		// text-align: center;
+		user-select: none;
+
+		.fa-quote-left {
+			position: absolute;
+			top: 25px;
+			left: 25px;
+			font-size: 1.2rem;
+		}
+
+		.fa-quote-right {
+			position: absolute;
+			bottom: 35px;
+			right: 25px;
+			font-size: 1.2rem;
+		}
+	}
+}
+
+// Line 11 to 17 don't work perfect
+.card:hover .face.front-face {
+	transform: rotateY(180deg);
+}
+
+.card:hover .face.back-face {
+	transform: rotateY(360deg);
+}

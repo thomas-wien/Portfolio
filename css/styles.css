@@ -1,0 +1,115 @@
+.card {
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  border: none;
+  background-color: inherit;
+}
+.card .face {
+  position: absolute;
+  color: #0c2c44;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 15px 35px gray;
+  border-radius: 15px;
+  background: #cacdcf;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+.card .face.front-face {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card .face.front-face .profile {
+  width: 75%;
+  height: 150px;
+  border-radius: 2%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card .face.front-face .name {
+  letter-spacing: 2px;
+}
+.card .face.front-face .designation {
+  font-size: 0.8rem;
+  color: #3c5264;
+  letter-spacing: 0.8px;
+}
+.card .face.back-face {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #c4c7ca;
+  transform: rotateY(180deg);
+  padding: 20px 30px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.card .face.back-face .fa-quote-left {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  font-size: 1.2rem;
+}
+.card .face.back-face .fa-quote-right {
+  position: absolute;
+  bottom: 35px;
+  right: 25px;
+  font-size: 1.2rem;
+}
+
+.card:hover .face.front-face {
+  transform: rotateY(180deg);
+}
+
+.card:hover .face.back-face {
+  transform: rotateY(360deg);
+}
+
+.container {
+  justify-content: center;
+}
+.container .col-lg-4 {
+  display: flex;
+  justify-content: center;
+  bottom: 20px;
+}
+
+.titel {
+  color: #5b5c5c;
+  font-family: "Share Tech Mono", monospace;
+  /* font-size: 1.5cm; */
+  text-align: center;
+}
+
+.ITtext {
+  font-family: "Share Tech Mono", monospace;
+}
+
+.AccordionHeadDark {
+  background-color: #aaa;
+}
+
+.AccordionHeadMd {
+  background-color: #ccc;
+}
+
+.AccordionHeadLight {
+  background-color: #eee;
+}
+
+.btnShadow {
+  box-shadow: 0 15px 35px gray;
+}/*# sourceMappingURL=styles.css.map */

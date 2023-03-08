@@ -1,0 +1,38 @@
+@import "./partials/rotating_cards";
+
+.container {
+  justify-content: center;
+
+  .col-lg-4 {
+    display: flex;
+    justify-content: center;
+    bottom: 20px;
+  }
+}
+
+.titel {
+  color: #5b5c5c;
+  font-family: 'Share Tech Mono', monospace;
+  /* font-size: 1.5cm; */
+  text-align: center;
+}
+
+.ITtext {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.AccordionHeadDark {
+  background-color: #aaa;
+}
+
+.AccordionHeadMd {
+  background-color: #ccc;
+}
+
+.AccordionHeadLight {
+  background-color: #eee;
+}
+
+.btnShadow {
+  box-shadow: 0 15px 35px gray
+}
