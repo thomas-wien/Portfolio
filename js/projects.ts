@@ -37,7 +37,7 @@ let projects = [
   new project("Alumni website", "Groupwork / Angular / SCSS", "What we need", "The alumni website should consist of five sections: Home page, Alumni directory, Stories, Careers and Events. The purpose of the website is to give all necessary information about alumni", "frontEndProject.png", "http://netusil.codefactory.live/front-end-project/"),
 ]
 
-// create the rotating cards
+// Loop for create the rotating cards
 
 for (let i = 0; i < project.length; i++) { // Loop as many times projects containing contend
   // create the rotating cards
