@@ -11,24 +11,28 @@ $color-ts: hsl(220, 100%, 60%);
 $color-angular: hsl(0, 100%, 60%);
 // $color-vue: hsl(145, 100%, 60%);
 $color-communication: hsl(145, 100%, 60%);
-$color-cooperation: hsl(153, 100%, 60%);
-$color-empathy: hsl(162, 100%, 60%);
-$color-listening: hsl(168, 100%, 60%);
+$color-cooperation: hsl(189, 100%, 60%);
+$color-empathy: hsl(73, 100%, 60%);
+$color-listening: hsl(285, 100%, 60%);
+$color-teamwork: hsl(251, 100%, 60%);
+
 
 // the porcents of the skills
 $porcent-html: 95;
 $porcent-css: 95;
 $porcent-scss: 85;
 $porcent-js: 80;
-$porcent-ts: 55;
+$porcent-ts: 75;
 // $porcent-node: 30;
 // $porcent-react: 12;
-$porcent-angular: 55;
+$porcent-angular: 70;
 // $porcent-vue: 2;
 $porcent-communication: 98;
 $porcent-cooperation: 85;
 $porcent-empathy: 90;
-$porcent-listening: 80;
+$porcent-listening: 86;
+$porcent-teamwork: 92;
+
 
 @function strokeDashoffset($num) {
   @return 440 - (440 * $num) / 100;
@@ -128,6 +132,10 @@ $porcent-listening: 80;
     filter: drop-shadow(0 0 5px $color-listening);
   }
 
+  &-teamwork {
+    filter: drop-shadow(0 0 5px $color-teamwork);
+  }
+
 }
 
 .circle {
@@ -182,6 +190,11 @@ $porcent-listening: 80;
   &-listening {
     animation: anim_circle-listening 1s ease-in-out forwards;
   }
+
+  &-teamwork {
+    animation: anim_circle-teamwork 1s ease-in-out forwards;
+  }
+
 }
 
 
@@ -273,5 +286,11 @@ $porcent-listening: 80;
 @keyframes anim_circle-listening {
   to {
     stroke-dashoffset: strokeDashoffset($porcent-listening);
+  }
+}
+
+@keyframes anim_circle-teamwork {
+  to {
+    stroke-dashoffset: strokeDashoffset($porcent-teamwork);
   }
 }
