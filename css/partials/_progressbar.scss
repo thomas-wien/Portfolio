@@ -15,6 +15,7 @@ $color-cooperation: hsl(189, 100%, 60%);
 $color-empathy: hsl(73, 100%, 60%);
 $color-listening: hsl(285, 100%, 60%);
 $color-teamwork: hsl(251, 100%, 60%);
+$color-knowledge: hsl(0, 100%, 60%);
 
 
 // the porcents of the skills
@@ -32,7 +33,7 @@ $porcent-cooperation: 85;
 $porcent-empathy: 90;
 $porcent-listening: 86;
 $porcent-teamwork: 92;
-
+$porcent-knowledge: 99;
 
 @function strokeDashoffset($num) {
   @return 440 - (440 * $num) / 100;
@@ -136,6 +137,10 @@ $porcent-teamwork: 92;
     filter: drop-shadow(0 0 5px $color-teamwork);
   }
 
+  &-teamwork {
+    filter: drop-shadow(0 0 5px $color-knowledge);
+  }
+
 }
 
 .circle {
@@ -193,6 +198,10 @@ $porcent-teamwork: 92;
 
   &-teamwork {
     animation: anim_circle-teamwork 1s ease-in-out forwards;
+  }
+
+  &-knowledge {
+    animation: anim_circle-knowledge 1s ease-in-out forwards;
   }
 
 }
@@ -292,5 +301,11 @@ $porcent-teamwork: 92;
 @keyframes anim_circle-teamwork {
   to {
     stroke-dashoffset: strokeDashoffset($porcent-teamwork);
+  }
+}
+
+@keyframes anim_circle-knowledge {
+  to {
+    stroke-dashoffset: strokeDashoffset($porcent-knowledge);
   }
 }

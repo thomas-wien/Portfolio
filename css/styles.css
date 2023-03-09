@@ -149,6 +149,9 @@
 .shadow-teamwork {
   filter: drop-shadow(0 0 5px hsl(251, 100%, 60%));
 }
+.shadow-teamwork {
+  filter: drop-shadow(0 0 5px hsl(0, 100%, 60%));
+}
 
 .circle-html {
   animation: anim_circle-html 1s ease-in-out forwards;
@@ -182,6 +185,9 @@
 }
 .circle-teamwork {
   animation: anim_circle-teamwork 1s ease-in-out forwards;
+}
+.circle-knowledge {
+  animation: anim_circle-knowledge 1s ease-in-out forwards;
 }
 
 .progressbar__text {
@@ -247,6 +253,11 @@
 @keyframes anim_circle-teamwork {
   to {
     stroke-dashoffset: 35.2;
+  }
+}
+@keyframes anim_circle-knowledge {
+  to {
+    stroke-dashoffset: 4.4;
   }
 }
 .container {
