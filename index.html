@@ -13,6 +13,7 @@
   <meta name="description" content="The Projects and Vita of Thomas Netusil">
   <link rel="stylesheet" href="./css/styles.css">
   <script type="text/javascript" src="js/projects.js" defer></script>
+  <script type="text/javascript" src="js/skills.js" defer></script>
   <link href="favicon.ico" rel="icon">
   <title>Portfolio Thomas Netusil</title>
 </head>
@@ -57,13 +58,14 @@
           <button class="accordion-button bg-secondary text-light collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <h3 class="text-center py-5 titel bg-secondary text-light w-100">my certifications and certificates of
-              service
+              service (selection)
               <br>
             </h3>
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse bg-secondary text-light collapse" aria-labelledby="headingTwo"
           data-bs-parent="#accordion">
+          <!-- The Certifications and Letters of recomendations are included as PDF Files-->
           <div class="accordion-body bg-secondary text-light">
             <div class="row row-cols-1 row-cols-md-2 g-2">
               <iframe src="./images/Zertifikate_ThomasNetusil.pdf#toolbar=0" name="content" width="45%" height="800px"
@@ -79,119 +81,16 @@
           <button class="accordion-button bg-dark text-success collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             <h3 class="text-center py-5 titel bg-dark text-success w-100">my skills (social and
-              professional), (selection)
+              professional)
             </h3>
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
           data-bs-parent="#accordion">
           <div class="accordion-body bg-dark text-success ITtext">
-            <div class="row row-cols-1 row-cols-md-2 g-2">
-
-
-              <!-- the values for the percentage values are in _progressbar.scss  -->
-
-              <div class="container__progressbars">
-
-                <h2 class="bg-dark text-success w-100 text-center"><strong>Frontend WebDev Skills</strong></h2>
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-html shadow-html"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-html">HTML</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-css shadow-css"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-css">CSS</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-scss shadow-scss"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-scss">SCSS</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-js shadow-js"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-js">JavaScript</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-ts shadow-ts"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-ts">TypeScript</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-angular shadow-angular">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-angular">Angular</span>
-                </div>
-              </div>
-              <div class="container__progressbars">
-                <h2 class="bg-dark text-success w-100 text-center pt-5"><strong>My Social Skills</strong></h2>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70"
-                      class="progressbar__svg-circle circle-communication shadow-communication"> </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-communication">communication</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-teamwork shadow-teamwork">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-teamwork">teamwork</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70"
-                      class="progressbar__svg-circle circle-cooperation shadow-cooperation">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-cooperation">cooperation</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-empathy shadow-empathy">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-empathy">empathy</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-listening shadow-listening">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-listening">listening</span>
-                </div>
-
-                <div class="progressbar">
-                  <svg class="progressbar__svg">
-                    <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-knowledge shadow-knowledge">
-                    </circle>
-                  </svg>
-                  <span class="progressbar__text shadow-knowledge text-center">thirsty for knowledge</span>
-                </div>
-
-              </div>
-
-
+            <!-- the content is created in skills.ts using ID SkillsProgressCircles-->
+            <!-- the values for the percentage values are in _progressbar.scss  -->
+            <div id="SkillsProgressCircles" class="row row-cols-1 row-cols-md-2 g-2">
             </div>
           </div>
         </div>
