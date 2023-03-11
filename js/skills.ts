@@ -1,4 +1,6 @@
-// the perecents of the skill are defined in _skill.scss
+// the perecents of the skills are defined in _skill.scss
+
+// defining the Place in the HTML Document where the Skills will be shown
 let resultskills = document.getElementById("SkillsProgressCircles") as HTMLHtmlElement; // defining the place in index.html where the cards should be displayed
 
 interface ISkills {
@@ -32,6 +34,9 @@ let skills = [
   new skill("JavaScript", "js", true, "FrontEnd WebDev Skill"),
   new skill("TypeScript", "ts", true, "FrontEnd WebDev Skill"),
   new skill("Angular", "angular", true, "FrontEnd WebDev Skill"),
+  new skill("MySQL", "mysql", true, "BackEnd WebDev Skill"),
+  new skill("PHP", "php", true, "BackEnd WebDev Skill"),
+  new skill("Symfony", "symfony", true, "BackEnd WebDev Skill"),
   new skill("communication", "communication", false, "Softskill"),
   new skill("teamwork", "teamwork", false, "Softskill"),
   new skill("cooperation", "cooperation", false, "Softskill"),
@@ -40,21 +45,21 @@ let skills = [
   new skill("thirsty for knowledge", "knowledge", false, "Softskill"),
 ]
 
-function Skill(type: string = "") {
+function Skill(type: string = "") { // type is the SkillType from the Array to Filter the Result
 
   // create the Skill Group Head depanding on the SkillType 
   if (type == "FrontEnd WebDev Skill") {
-    resultskills.innerHTML += `<h2 class="bg-dark text-success w-100 text-center"><strong>Frontend WebDev Skills</strong></h2>`
+    resultskills.innerHTML += `<h3 class="bg-dark text-success w-100 text-center"><strong>Frontend WebDev Skills</strong></h3>`
+  } else if (type == "BackEnd WebDev Skill") {
+    resultskills.innerHTML += `<h3 class="bg-dark text-success w-100 text-center"><strong>My Social Skills</strong></h3>`
   } else if (type == "Softskill") {
-    resultskills.innerHTML += `<h2 class="bg-dark text-success w-100 text-center"><strong>My Social Skills</strong></h2>`
+    resultskills.innerHTML += `<h3 class="bg-dark text-success w-100 text-center"><strong>My Social Skills</strong></h3>`
   }
 
   for (let i = 0; i < skills.length; i++) { // Loop as many times skill containing content
 
     // create the skill progress circle
     if (skills[i].skillType == type) {
-      //if (cards[i].skillType == "Softskill") {
-      // <h2 class="bg-dark text-success w-100 text-center"><strong>${cards[i].skillType}</strong></h2>
       resultskills.innerHTML += `
     <div class="progressbar">
       <svg class="progressbar__svg">
@@ -68,4 +73,5 @@ function Skill(type: string = "") {
 }
 // generating the Web Content
 Skill("FrontEnd WebDev Skill");
+// Skill("BackEnd WebDev Skill");
 Skill("Softskill");
