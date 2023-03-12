@@ -27,7 +27,7 @@ class Skill {
     // Create the skill progress circle
     static createSkillCircle(skill) {
         return `
-      <div class="progressbar">
+      <div class="progressbar mx-auto"  style="border: solid 1px red;" >
         <svg class="progressbar__svg">
           <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"> </circle>
         </svg>

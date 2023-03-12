@@ -242,7 +242,7 @@
 }
 @keyframes anim_circle-empathy {
   to {
-    stroke-dashoffset: 44;
+    stroke-dashoffset: 22;
   }
 }
 @keyframes anim_circle-listening {
@@ -252,12 +252,12 @@
 }
 @keyframes anim_circle-teamwork {
   to {
-    stroke-dashoffset: 35.2;
+    stroke-dashoffset: 26.4;
   }
 }
 @keyframes anim_circle-problem {
   to {
-    stroke-dashoffset: 4.4;
+    stroke-dashoffset: 44;
   }
 }
 .container {
