@@ -44,7 +44,7 @@ class Skill implements ISkill {
   // Create the skill progress circle
   static createSkillCircle(skill: Skill): string {
     return `
-      <div class="progressbar mx-auto"  style="border: solid 1px red;" >
+      <div class="progressbar mx-auto">
         <svg class="progressbar__svg">
           <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"> </circle>
         </svg>
