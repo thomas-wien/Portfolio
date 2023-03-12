@@ -186,8 +186,8 @@
 .circle-teamwork {
   animation: anim_circle-teamwork 1s ease-in-out forwards;
 }
-.circle-knowledge {
-  animation: anim_circle-knowledge 1s ease-in-out forwards;
+.circle-problem {
+  animation: anim_circle-problem 1s ease-in-out forwards;
 }
 
 .progressbar__text {
@@ -255,7 +255,7 @@
     stroke-dashoffset: 35.2;
   }
 }
-@keyframes anim_circle-knowledge {
+@keyframes anim_circle-problem {
   to {
     stroke-dashoffset: 4.4;
   }

@@ -12,7 +12,7 @@ $color-cooperation: hsl(189, 100%, 60%);
 $color-empathy: hsl(73, 100%, 60%);
 $color-listening: hsl(285, 100%, 60%);
 $color-teamwork: hsl(251, 100%, 60%);
-$color-knowledge: hsl(0, 100%, 60%);
+$color-problem: hsl(0, 100%, 60%);
 // $color-php: hsl(110, 100%, 60%);
 // $color-mysql: hsl(180, 100%, 60%);
 // $color-symfony: hsl(145, 100%, 60%);
@@ -30,7 +30,7 @@ $porcent-cooperation: 85;
 $porcent-empathy: 90;
 $porcent-listening: 86;
 $porcent-teamwork: 92;
-$porcent-knowledge: 99;
+$porcent-problem: 99;
 // $porcent-php: 70;
 // $porcent-mysql: 70;
 // $porcent-symfony: 0;
@@ -127,7 +127,7 @@ $porcent-knowledge: 99;
   }
 
   &-teamwork {
-    filter: drop-shadow(0 0 5px $color-knowledge);
+    filter: drop-shadow(0 0 5px $color-problem);
   }
 
   // &-php {
@@ -188,8 +188,8 @@ $porcent-knowledge: 99;
     animation: anim_circle-teamwork 1s ease-in-out forwards;
   }
 
-  &-knowledge {
-    animation: anim_circle-knowledge 1s ease-in-out forwards;
+  &-problem {
+    animation: anim_circle-problem 1s ease-in-out forwards;
   }
 
   // &-php {
@@ -286,9 +286,9 @@ $porcent-knowledge: 99;
   }
 }
 
-@keyframes anim_circle-knowledge {
+@keyframes anim_circle-problem {
   to {
-    stroke-dashoffset: strokeDashoffset($porcent-knowledge);
+    stroke-dashoffset: strokeDashoffset($porcent-problem);
   }
 }
 
