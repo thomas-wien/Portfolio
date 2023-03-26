@@ -64,7 +64,7 @@ const skills = [
   new Skill("Angular", "angular", true, "FrontEnd WebDev Skill"),
   new Skill("MySQL", "mysql", true, "BackEnd WebDev Skill"),
   new Skill("PHP", "php", true, "BackEnd WebDev Skill"),
-  new Skill("Symfony", "symfony", true, "BackEnd WebDev Skill"),
+  // new Skill("Symfony", "symfony", true, "BackEnd WebDev Skill"),
   new Skill("communication", "communication", false, "Softskill"),
   new Skill("teamwork", "teamwork", false, "Softskill"),
   new Skill("cooperation", "cooperation", false, "Softskill"),
@@ -101,5 +101,5 @@ function skill(type: string = "") {
 }
 
 skill("FrontEnd WebDev Skill");
-// skill("BackEnd WebDev Skill");
+skill("BackEnd WebDev Skill");
 skill("Softskill");

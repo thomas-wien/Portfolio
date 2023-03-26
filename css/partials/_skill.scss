@@ -13,8 +13,8 @@ $color-empathy: hsl(73, 100%, 60%);
 $color-listening: hsl(285, 100%, 60%);
 $color-teamwork: hsl(251, 100%, 60%);
 $color-problem: hsl(0, 100%, 60%);
-// $color-php: hsl(110, 100%, 60%);
-// $color-mysql: hsl(180, 100%, 60%);
+$color-php: hsl(110, 100%, 60%);
+$color-mysql: hsl(180, 100%, 60%);
 // $color-symfony: hsl(145, 100%, 60%);
 
 
@@ -31,8 +31,8 @@ $porcent-empathy: 95;
 $porcent-listening: 86;
 $porcent-teamwork: 94;
 $porcent-problem: 90;
-// $porcent-php: 70;
-// $porcent-mysql: 70;
+$porcent-php: 70;
+$porcent-mysql: 70;
 // $porcent-symfony: 0;
 
 
@@ -130,13 +130,13 @@ $porcent-problem: 90;
     filter: drop-shadow(0 0 5px $color-problem);
   }
 
-  // &-php {
-  //   filter: drop-shadow(0 0 5px $color-php);
-  // }
+  &-php {
+    filter: drop-shadow(0 0 5px $color-php);
+  }
 
-  // &-mysql {
-  //   filter: drop-shadow(0 0 5px $color-mysql);
-  // }
+  &-mysql {
+    filter: drop-shadow(0 0 5px $color-mysql);
+  }
 
   // &-symfony {
   //   filter: drop-shadow(0 0 5px $color-symfony);
@@ -192,13 +192,13 @@ $porcent-problem: 90;
     animation: anim_circle-problem 1s ease-in-out forwards;
   }
 
-  // &-php {
-  //   animation: anim_circle-php 1s ease-in-out forwards;
-  // }
+  &-php {
+    animation: anim_circle-php 1s ease-in-out forwards;
+  }
 
-  // &-mysql {
-  //   animation: anim_circle-mysql 1s ease-in-out forwards;
-  // }
+  &-mysql {
+    animation: anim_circle-mysql 1s ease-in-out forwards;
+  }
 
   // &-symfony {
   //   animation: anim_circle-symfony 1s ease-in-out forwards;
@@ -292,17 +292,17 @@ $porcent-problem: 90;
   }
 }
 
-// @keyframes anim_circle-php {
-//   to {
-//     stroke-dashoffset: strokeDashoffset($porcent-php);
-//   }
-// }
+@keyframes anim_circle-php {
+  to {
+    stroke-dashoffset: strokeDashoffset($porcent-php);
+  }
+}
 
-// @keyframes anim_circle-mysql {
-//   to {
-//     stroke-dashoffset: strokeDashoffset($porcent-mysql);
-//   }
-// }
+@keyframes anim_circle-mysql {
+  to {
+    stroke-dashoffset: strokeDashoffset($porcent-mysql);
+  }
+}
 
 // @keyframes anim_circle-symfony {
 //   to {
