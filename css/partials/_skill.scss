@@ -37,7 +37,7 @@ $porcent-mysql: 70;
 
 
 @function strokeDashoffset($num) {
-  @return 440 - (440 * $num) / 100;
+  @return (440 - calc((440 * $num) / 100));
 }
 
 * {

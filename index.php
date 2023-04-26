@@ -1,18 +1,18 @@
 <?php require_once 'mail.php' ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme="auto">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous" defer></script>
+  <!-- inculding Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous" defer></script>
+  <!-- end inculding Bootstrap -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> <!-- Necessary for dark/light mode -->
   <meta name="author" content="Thomas Netusil">
   <meta name="description" content="The Projects and Vita of Thomas Netusil">
-  <link rel="stylesheet" href="./css/styles.css">
   <script src="js/darkLight.js" defer></script> <!-- light/Darkmode switch -->
   <script src="js/projects.js" defer></script> <!-- Necessary for the Project Cards -->
   <script src="js/skills.js" defer></script> <!-- Necessary for the Skills -->
@@ -39,7 +39,7 @@
             </h3>
           </button>
         </h2>
-        <div id="collapseOne" class="accordion-collapse collapse bg-light text-secondary py-3" aria-labelledby="headingOne" data-bs-parent="#accordion">
+        <div id="collapseOne" class="accordion-collapse collapse text-secondary py-3" aria-labelledby="headingOne" data-bs-parent="#accordion">
           <!-- remove show to switch of default opening of accordeon -->
           <div class="accordion-body">
             <div id="ProjectCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5 pb-5">
@@ -70,9 +70,9 @@
             </h3>
           </button>
         </h2>
-        <div id="collapseTwo" class="accordion-collapse bg-secondary text-light collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+        <div id="collapseTwo" class="accordion-collapse  text-light collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
           <!-- The Certifications and Letters of recomendations are included as PDF Files-->
-          <div class="accordion-body bg-secondary text-light">
+          <div class="accordion-body text-light">
             <div class="row row-cols-1 row-cols-md-2 g-2">
               <iframe src="./images/Zertifikate_ThomasNetusil.pdf#toolbar=0" name="content" width="45%" height="800px" style="box-shadow: 0 15px 35px gray" title="Certificates"></iframe>
               <iframe src="./images/Zeugnisse_ThomasNetusil.pdf#toolbar=0" name="content" width="45%" height="800px" style="box-shadow: 0 15px 35px gray" title="certificates of service"></iframe>
@@ -92,7 +92,7 @@
           </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
-          <div class="accordion-body bg-dark text-success ITtext">
+          <div class="accordion-body text-success bg-dark ITtext">
             <!-- the content is created in skills.ts using ID SkillsProgressCircles-->
             <!-- the values for the percentage values are in _progressbar.scss  -->
             <div id="SkillsProgressCircles" class="row row-cols-1 row-cols-md-2 g-2"></div>
@@ -110,8 +110,8 @@
             </h3>
           </button>
         </h2>
-        <div id="collapseFour" class="accordion-collapse bg-light text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
-          <div class="accordion-body bg-light text-secondary">
+        <div id="collapseFour" class="accordion-collapse  text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+          <div class="accordion-body text-secondary">
             <!-- Wrapper container -->
             <div class="container py-4">
 
