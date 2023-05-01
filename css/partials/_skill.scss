@@ -15,7 +15,7 @@ $color-teamwork: hsl(251, 100%, 60%);
 $color-problem: hsl(0, 100%, 60%);
 $color-php: hsl(110, 100%, 60%);
 $color-mysql: hsl(180, 100%, 60%);
-// $color-symfony: hsl(145, 100%, 60%);
+$color-symfony: hsl(145, 100%, 60%);
 
 
 // the porcents of the skills
@@ -33,7 +33,7 @@ $porcent-teamwork: 94;
 $porcent-problem: 90;
 $porcent-php: 70;
 $porcent-mysql: 70;
-// $porcent-symfony: 0;
+$porcent-symfony: 55;
 
 
 @function strokeDashoffset($num) {
@@ -138,9 +138,9 @@ $porcent-mysql: 70;
     filter: drop-shadow(0 0 5px $color-mysql);
   }
 
-  // &-symfony {
-  //   filter: drop-shadow(0 0 5px $color-symfony);
-  // }
+  &-symfony {
+    filter: drop-shadow(0 0 5px $color-symfony);
+  }
 }
 
 .circle {
@@ -200,9 +200,9 @@ $porcent-mysql: 70;
     animation: anim_circle-mysql 1s ease-in-out forwards;
   }
 
-  // &-symfony {
-  //   animation: anim_circle-symfony 1s ease-in-out forwards;
-  // }
+  &-symfony {
+    animation: anim_circle-symfony 1s ease-in-out forwards;
+  }
 }
 
 
@@ -304,8 +304,8 @@ $porcent-mysql: 70;
   }
 }
 
-// @keyframes anim_circle-symfony {
-//   to {
-//     stroke-dashoffset: strokeDashoffset($porcent-symfony);
-//   }
-// }
+@keyframes anim_circle-symfony {
+  to {
+    stroke-dashoffset: strokeDashoffset($porcent-symfony);
+  }
+}
