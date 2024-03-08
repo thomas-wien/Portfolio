@@ -20,7 +20,7 @@ $colors: (
   symfony: hsl(145, 100%, 60%)
 );
 
-// Define percentages for skills
+// Define knowledge percentage for skills
 $skill-percentages: (
   html: 85,
   css: 75,
@@ -107,7 +107,7 @@ $skill-percentages: (
 // Apply animations
 @each $key, $value in $skill-percentages {
   .circle-#{$key} {
-    animation: circle-animation(#{$key}, #{$value}) 1s ease-in-out forwards;
+    animation: anim_circle-#{$key} 1s ease-in-out forwards;
   }
 }
 
@@ -119,4 +119,13 @@ $skill-percentages: (
   color: $color-white;
   border-radius: 0.25em;
   transform: translate(-50%, -50%) rotate(90deg);
+}
+
+// Define keyframes
+@each $key, $value in $skill-percentages {
+  @keyframes anim_circle-#{$key} {
+    to {
+      stroke-dashoffset: strokeDashoffset($value);
+    }
+  }
 }
