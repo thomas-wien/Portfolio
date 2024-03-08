@@ -1,40 +1,43 @@
+// Define colors
 $color-black: hsl(0, 0%, 5%);
-$color-color: hsl(0, 0%, 100%);
+$color-white: hsl(0, 0%, 100%);
 
-$color-html: hsl(15, 100%, 60%);
-$color-css: hsl(200, 100%, 60%);
-$color-scss: hsl(300, 100%, 60%);
-$color-js: hsl(60, 100%, 60%);
-$color-ts: hsl(220, 100%, 60%);
-$color-angular: hsl(0, 100%, 60%);
-$color-communication: hsl(145, 100%, 60%);
-$color-cooperation: hsl(189, 100%, 60%);
-$color-empathy: hsl(73, 100%, 60%);
-$color-listening: hsl(285, 100%, 60%);
-$color-teamwork: hsl(251, 100%, 60%);
-$color-problem: hsl(0, 100%, 60%);
-$color-php: hsl(110, 100%, 60%);
-$color-mysql: hsl(180, 100%, 60%);
-$color-symfony: hsl(145, 100%, 60%);
+$colors: (
+  html: hsl(15, 100%, 60%),
+  css: hsl(200, 100%, 60%),
+  scss: hsl(300, 100%, 60%),
+  js: hsl(60, 100%, 60%),
+  ts: hsl(220, 100%, 60%),
+  angular: hsl(0, 100%, 60%),
+  communication: hsl(145, 100%, 60%),
+  cooperation: hsl(189, 100%, 60%),
+  empathy: hsl(73, 100%, 60%),
+  listening: hsl(285, 100%, 60%),
+  teamwork: hsl(251, 100%, 60%),
+  problem: hsl(0, 100%, 60%),
+  php: hsl(110, 100%, 60%),
+  mysql: hsl(180, 100%, 60%),
+  symfony: hsl(145, 100%, 60%)
+);
 
-
-// the porcents of the skills
-$porcent-html: 85;
-$porcent-css: 75;
-$porcent-scss: 70;
-$porcent-js: 60;
-$porcent-ts: 60;
-$porcent-angular: 55;
-$porcent-communication: 98;
-$porcent-cooperation: 85;
-$porcent-empathy: 95;
-$porcent-listening: 86;
-$porcent-teamwork: 94;
-$porcent-problem: 90;
-$porcent-php: 70;
-$porcent-mysql: 70;
-$porcent-symfony: 55;
-
+// Define percentages for skills
+$skill-percentages: (
+  html: 85,
+  css: 75,
+  scss: 70,
+  js: 60,
+  ts: 60,
+  angular: 55,
+  communication: 98,
+  cooperation: 85,
+  empathy: 95,
+  listening: 86,
+  teamwork: 94,
+  problem: 90,
+  php: 70,
+  mysql: 70,
+  symfony: 55
+);
 
 @function strokeDashoffset($num) {
   @return (440 - calc((440 * $num) / 100));
@@ -43,7 +46,6 @@ $porcent-symfony: 55;
 * {
   box-sizing: border-box;
 }
-
 
 .container__progressbars {
   display: flex;
@@ -76,236 +78,45 @@ $porcent-symfony: 55;
   stroke-width: 10;
   stroke-dasharray: 440;
   stroke-dashoffset: 440;
-  stroke: hsl(0, 0%, 100%);
+  stroke: $color-white;
   stroke-linecap: round;
   transform: translate(5px, 5px); // stroke-width / 2
 }
 
-.shadow {
-  &-html {
-    filter: drop-shadow(0 0 5px $color-html);
-  }
+// Define shadow mixins
+@mixin shadow($color) {
+  filter: drop-shadow(0 0 5px $color);
+}
 
-  &-css {
-    filter: drop-shadow(0 0 5px $color-css);
-  }
-
-  &-scss {
-    filter: drop-shadow(0 0 5px $color-scss);
-  }
-
-  &-js {
-    filter: drop-shadow(0 0 5px $color-js);
-  }
-
-  &-ts {
-    filter: drop-shadow(0 0 5px $color-ts);
-  }
-
-  &-angular {
-    filter: drop-shadow(0 0 5px $color-angular);
-  }
-
-  &-communication {
-    filter: drop-shadow(0 0 5px $color-communication);
-  }
-
-  &-cooperation {
-    filter: drop-shadow(0 0 5px $color-cooperation);
-  }
-
-  &-empathy {
-    filter: drop-shadow(0 0 5px $color-empathy);
-  }
-
-  &-listening {
-    filter: drop-shadow(0 0 5px $color-listening);
-  }
-
-  &-teamwork {
-    filter: drop-shadow(0 0 5px $color-teamwork);
-  }
-
-  &-teamwork {
-    filter: drop-shadow(0 0 5px $color-problem);
-  }
-
-  &-php {
-    filter: drop-shadow(0 0 5px $color-php);
-  }
-
-  &-mysql {
-    filter: drop-shadow(0 0 5px $color-mysql);
-  }
-
-  &-symfony {
-    filter: drop-shadow(0 0 5px $color-symfony);
+// Apply shadows
+@each $key, $value in $colors {
+  .shadow-#{$key} {
+    @include shadow($value);
   }
 }
 
-.circle {
-  &-html {
-    animation: anim_circle-html 1s ease-in-out forwards;
-  }
-
-  &-css {
-    animation: anim_circle-css 1s ease-in-out forwards;
-  }
-
-  &-scss {
-    animation: anim_circle-scss 1s ease-in-out forwards;
-  }
-
-  &-js {
-    animation: anim_circle-js 1s ease-in-out forwards;
-  }
-
-  &-ts {
-    animation: anim_circle-ts 1s ease-in-out forwards;
-  }
-
-  &-angular {
-    animation: anim_circle-angular 1s ease-in-out forwards;
-  }
-
-  &-communication {
-    animation: anim_circle-communication 1s ease-in-out forwards;
-  }
-
-  &-cooperation {
-    animation: anim_circle-cooperation 1s ease-in-out forwards;
-  }
-
-  &-empathy {
-    animation: anim_circle-empathy 1s ease-in-out forwards;
-  }
-
-  &-listening {
-    animation: anim_circle-listening 1s ease-in-out forwards;
-  }
-
-  &-teamwork {
-    animation: anim_circle-teamwork 1s ease-in-out forwards;
-  }
-
-  &-problem {
-    animation: anim_circle-problem 1s ease-in-out forwards;
-  }
-
-  &-php {
-    animation: anim_circle-php 1s ease-in-out forwards;
-  }
-
-  &-mysql {
-    animation: anim_circle-mysql 1s ease-in-out forwards;
-  }
-
-  &-symfony {
-    animation: anim_circle-symfony 1s ease-in-out forwards;
+// Define animation mixins
+@mixin circle-animation($name, $percentage) {
+  @keyframes anim_circle-#{$name} {
+    to {
+      stroke-dashoffset: strokeDashoffset($percentage);
+    }
   }
 }
 
+// Apply animations
+@each $key, $value in $skill-percentages {
+  .circle-#{$key} {
+    animation: circle-animation(#{$key}, #{$value}) 1s ease-in-out forwards;
+  }
+}
 
 .progressbar__text {
   position: absolute;
   top: 50%;
   left: 50%;
   padding: 0.25em 0.5em;
-  color: hsl(0, 0%, 100%);
-  // font-family: Arial, Helvetica, sans-serif;
+  color: $color-white;
   border-radius: 0.25em;
   transform: translate(-50%, -50%) rotate(90deg);
-}
-
-//  @keyframes
-
-@keyframes anim_circle-html {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-html);
-  }
-}
-
-@keyframes anim_circle-css {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-css);
-  }
-}
-
-@keyframes anim_circle-scss {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-scss);
-  }
-}
-
-@keyframes anim_circle-js {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-js);
-  }
-}
-
-@keyframes anim_circle-ts {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-ts);
-  }
-}
-
-@keyframes anim_circle-angular {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-angular);
-  }
-}
-
-
-@keyframes anim_circle-communication {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-communication);
-  }
-}
-
-@keyframes anim_circle-cooperation {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-cooperation);
-  }
-}
-
-@keyframes anim_circle-empathy {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-empathy);
-  }
-}
-
-@keyframes anim_circle-listening {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-listening);
-  }
-}
-
-@keyframes anim_circle-teamwork {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-teamwork);
-  }
-}
-
-@keyframes anim_circle-problem {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-problem);
-  }
-}
-
-@keyframes anim_circle-php {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-php);
-  }
-}
-
-@keyframes anim_circle-mysql {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-mysql);
-  }
-}
-
-@keyframes anim_circle-symfony {
-  to {
-    stroke-dashoffset: strokeDashoffset($porcent-symfony);
-  }
 }

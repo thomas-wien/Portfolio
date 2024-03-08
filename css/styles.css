@@ -6,6 +6,7 @@
   border: none;
   background-color: inherit;
 }
+
 .card .face {
   position: absolute;
   color: #0c2c44;
@@ -21,6 +22,7 @@
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
 }
+
 .card .face.front-face {
   position: absolute;
   display: flex;
@@ -28,21 +30,25 @@
   align-items: center;
   justify-content: center;
 }
+
 .card .face.front-face .profile {
   width: 75%;
   height: 150px;
   border-radius: 2%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
+
 .card .face.front-face .name {
   letter-spacing: 2px;
 }
+
 .card .face.front-face .technics {
   font-size: 0.8rem;
   color: #3c5264;
   letter-spacing: 0.8px;
 }
+
 .card .face.back-face {
   position: absolute;
   display: flex;
@@ -53,14 +59,16 @@
   transform: rotateY(180deg);
   padding: 20px 30px;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
+
 .card .face.back-face .fa-quote-left {
   position: absolute;
   top: 25px;
   left: 25px;
 }
+
 .card .face.back-face .fa-quote-right {
   position: absolute;
   bottom: 35px;
@@ -118,93 +126,121 @@
 .shadow-html {
   filter: drop-shadow(0 0 5px hsl(15, 100%, 60%));
 }
+
 .shadow-css {
   filter: drop-shadow(0 0 5px hsl(200, 100%, 60%));
 }
+
 .shadow-scss {
   filter: drop-shadow(0 0 5px hsl(300, 100%, 60%));
 }
+
 .shadow-js {
   filter: drop-shadow(0 0 5px hsl(60, 100%, 60%));
 }
+
 .shadow-ts {
   filter: drop-shadow(0 0 5px hsl(220, 100%, 60%));
 }
+
 .shadow-angular {
   filter: drop-shadow(0 0 5px hsl(0, 100%, 60%));
 }
+
 .shadow-communication {
   filter: drop-shadow(0 0 5px hsl(145, 100%, 60%));
 }
+
 .shadow-cooperation {
   filter: drop-shadow(0 0 5px hsl(189, 100%, 60%));
 }
+
 .shadow-empathy {
   filter: drop-shadow(0 0 5px hsl(73, 100%, 60%));
 }
+
 .shadow-listening {
   filter: drop-shadow(0 0 5px hsl(285, 100%, 60%));
 }
+
 .shadow-teamwork {
   filter: drop-shadow(0 0 5px hsl(251, 100%, 60%));
 }
-.shadow-teamwork {
+
+.shadow-problem {
   filter: drop-shadow(0 0 5px hsl(0, 100%, 60%));
 }
+
 .shadow-php {
   filter: drop-shadow(0 0 5px hsl(110, 100%, 60%));
 }
+
 .shadow-mysql {
   filter: drop-shadow(0 0 5px hsl(180, 100%, 60%));
 }
+
 .shadow-symfony {
   filter: drop-shadow(0 0 5px hsl(145, 100%, 60%));
 }
 
 .circle-html {
-  animation: anim_circle-html 1s ease-in-out forwards;
+  animation: circle-animation(html, 85) 1s ease-in-out forwards;
 }
+
 .circle-css {
-  animation: anim_circle-css 1s ease-in-out forwards;
+  animation: circle-animation(css, 75) 1s ease-in-out forwards;
 }
+
 .circle-scss {
-  animation: anim_circle-scss 1s ease-in-out forwards;
+  animation: circle-animation(scss, 70) 1s ease-in-out forwards;
 }
+
 .circle-js {
-  animation: anim_circle-js 1s ease-in-out forwards;
+  animation: circle-animation(js, 60) 1s ease-in-out forwards;
 }
+
 .circle-ts {
-  animation: anim_circle-ts 1s ease-in-out forwards;
+  animation: circle-animation(ts, 60) 1s ease-in-out forwards;
 }
+
 .circle-angular {
-  animation: anim_circle-angular 1s ease-in-out forwards;
+  animation: circle-animation(angular, 55) 1s ease-in-out forwards;
 }
+
 .circle-communication {
-  animation: anim_circle-communication 1s ease-in-out forwards;
+  animation: circle-animation(communication, 98) 1s ease-in-out forwards;
 }
+
 .circle-cooperation {
-  animation: anim_circle-cooperation 1s ease-in-out forwards;
+  animation: circle-animation(cooperation, 85) 1s ease-in-out forwards;
 }
+
 .circle-empathy {
-  animation: anim_circle-empathy 1s ease-in-out forwards;
+  animation: circle-animation(empathy, 95) 1s ease-in-out forwards;
 }
+
 .circle-listening {
-  animation: anim_circle-listening 1s ease-in-out forwards;
+  animation: circle-animation(listening, 86) 1s ease-in-out forwards;
 }
+
 .circle-teamwork {
-  animation: anim_circle-teamwork 1s ease-in-out forwards;
+  animation: circle-animation(teamwork, 94) 1s ease-in-out forwards;
 }
+
 .circle-problem {
-  animation: anim_circle-problem 1s ease-in-out forwards;
+  animation: circle-animation(problem, 90) 1s ease-in-out forwards;
 }
+
 .circle-php {
-  animation: anim_circle-php 1s ease-in-out forwards;
+  animation: circle-animation(php, 70) 1s ease-in-out forwards;
 }
+
 .circle-mysql {
-  animation: anim_circle-mysql 1s ease-in-out forwards;
+  animation: circle-animation(mysql, 70) 1s ease-in-out forwards;
 }
+
 .circle-symfony {
-  animation: anim_circle-symfony 1s ease-in-out forwards;
+  animation: circle-animation(symfony, 55) 1s ease-in-out forwards;
 }
 
 .progressbar__text {
@@ -217,81 +253,167 @@
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
-@keyframes anim_circle-html {
-  to {
-    stroke-dashoffset: 66;
-  }
+#lightSwitch {
+  transform: scale(1.8);
 }
-@keyframes anim_circle-css {
-  to {
-    stroke-dashoffset: 110;
-  }
+
+.custom-theme.bg-light {
+  background-color: darkslategray !important;
+  border-radius: 3px;
+  color: gainsboro;
+  text-decoration: underline;
 }
-@keyframes anim_circle-scss {
-  to {
-    stroke-dashoffset: 132;
-  }
+
+.custom-theme.bg-dark {
+  background-color: blanchedalmond !important;
+  box-shadow: 10px 5px 5px rgba(246, 255, 219, 0.5);
+  color: dimgray;
+  text-decoration: overline;
 }
-@keyframes anim_circle-js {
-  to {
-    stroke-dashoffset: 176;
-  }
+
+.card {
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  border: none;
+  background-color: inherit;
 }
-@keyframes anim_circle-ts {
-  to {
-    stroke-dashoffset: 176;
-  }
+
+.card .face {
+  position: absolute;
+  color: #0c2c44;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 15px 35px gray;
+  border-radius: 15px;
+  background: #cacdcf;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  backface-visibility: hidden;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
-@keyframes anim_circle-angular {
-  to {
-    stroke-dashoffset: 198;
-  }
+
+.card .face.front-face {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-@keyframes anim_circle-communication {
-  to {
-    stroke-dashoffset: 8.8;
-  }
+
+.card .face.front-face .profile {
+  width: 75%;
+  height: 150px;
+  border-radius: 2%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
-@keyframes anim_circle-cooperation {
-  to {
-    stroke-dashoffset: 66;
-  }
+
+.card .face.front-face .name {
+  letter-spacing: 2px;
 }
-@keyframes anim_circle-empathy {
-  to {
-    stroke-dashoffset: 22;
-  }
+
+.card .face.front-face .technics {
+  font-size: 0.8rem;
+  color: #3c5264;
+  letter-spacing: 0.8px;
 }
-@keyframes anim_circle-listening {
-  to {
-    stroke-dashoffset: 61.6;
-  }
+
+.card .face.back-face {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #cacdcf;
+  transform: rotateY(180deg);
+  padding: 20px 30px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
-@keyframes anim_circle-teamwork {
-  to {
-    stroke-dashoffset: 26.4;
-  }
+
+.card .face.back-face .fa-quote-left {
+  position: absolute;
+  top: 25px;
+  left: 25px;
 }
-@keyframes anim_circle-problem {
-  to {
-    stroke-dashoffset: 44;
-  }
+
+.card .face.back-face .fa-quote-right {
+  position: absolute;
+  bottom: 35px;
+  right: 25px;
 }
-@keyframes anim_circle-php {
-  to {
-    stroke-dashoffset: 132;
-  }
+
+.card:hover .front-face {
+  transform: rotateY(180deg);
 }
-@keyframes anim_circle-mysql {
-  to {
-    stroke-dashoffset: 132;
-  }
+
+.card:hover .back-face {
+  transform: rotateY(360deg);
 }
-@keyframes anim_circle-symfony {
-  to {
-    stroke-dashoffset: 198;
-  }
+
+* {
+  box-sizing: border-box;
 }
+
+.container__progressbars {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 270px;
+  width: 100%;
+  min-height: 100%;
+}
+
+.progressbar {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  margin: 1em;
+  transform: rotate(-90deg);
+}
+
+.progressbar__svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.progressbar__svg-circle {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 10;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 440;
+  stroke: hsl(0, 0%, 100%);
+  stroke-linecap: round;
+  transform: translate(5px, 5px);
+}
+
+.shadow-html {
+  filter: drop-shadow(0 0 5px hsl(15, 100%, 60%));
+}
+
+.circle-html {
+  animation: anim_circle-html 1s ease-in-out forwards;
+}
+
+.progressbar__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0.25em 0.5em;
+  color: hsl(0, 0%, 100%);
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
 #lightSwitch {
   transform: scale(1.8);
 }
@@ -313,6 +435,35 @@
 .container {
   justify-content: center;
 }
+
+.container .col-lg-4 {
+  display: flex;
+  justify-content: center;
+  bottom: 20px;
+}
+
+.titel {
+  color: #5b5c5c;
+  font-family: "Share Tech Mono", monospace;
+  text-align: center;
+}
+
+.ITtext {
+  font-family: "Share Tech Mono", monospace;
+}
+
+.AccordionHeadDark {
+  background-color: #aaa;
+}
+
+.btnShadow {
+  box-shadow: 0 15px 35px gray;
+}
+
+.container {
+  justify-content: center;
+}
+
 .container .col-lg-4 {
   display: flex;
   justify-content: center;
@@ -344,4 +495,6 @@
 
 .btnShadow {
   box-shadow: 0 15px 35px gray;
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/*# sourceMappingURL=styles.css.map */
