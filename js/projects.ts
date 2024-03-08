@@ -1,5 +1,6 @@
 const resultcards = document.getElementById("ProjectCards") as HTMLHtmlElement; // Define where project cards should be displayed
 const resultbuttons = document.getElementById("ProjectButtons") as HTMLHtmlElement; // Define where project buttons should be displayed
+// const extLink = "http://localhost/codereview"; // External address for links
 const extLink = "http://thomas.ariadne.at"; // External address for links
 // const extLink = "https://netusil.codefactory.live"; // external adress ariadne or codefactory
 
@@ -24,6 +25,7 @@ class Project implements IProjects {
     public link: string
   ) {
     this.image = `./images/${this.image}`; // Add "./images/" prefix to the image property
+    this.link = `${extLink}/${this.link}`; // Add "./images/" prefix to the image property
   }
 
   static allCards: Project[] = []; // Static array to hold all project cards
