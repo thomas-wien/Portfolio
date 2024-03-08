@@ -1,71 +1,62 @@
 "use strict";
-const resultcards = document.getElementById("ProjectCards"); // defining the place in index.html where the cards should be displayed
-const resultbuttons = document.getElementById("ProjectButtons"); // defining the place in index.html where the buttons should be displayed
-const extLink = "http://thomas.ariadne.at"; // external adress ariadne or codefactory
-/// Define a class to represent a project
+const resultcards = document.getElementById("ProjectCards"); // Define where project cards should be displayed
+const resultbuttons = document.getElementById("ProjectButtons"); // Define where project buttons should be displayed
+const extLink = "http://thomas.ariadne.at"; // External address for links
+// Define a class representing a project
 class Project {
-  // Define the properties of a project using a constructor
-  constructor(name, technics, description_short, description_detail, image, link) {
-    this.name = name;
-    this.technics = technics;
-    this.description_short = description_short;
-    this.description_detail = description_detail;
-    this.image = image;
-    this.link = link;
-    // Add "./images/" prefix to the image property
-    this.image = "./images/" + this.image;
-  }
-  // Define a static method to add a project card to the array
-  static addCard(card) {
-    Project.allCards.push(card);
-  }
-  // Define a static method to create the HTML for a project card
-  static createCard(card) {
-    return `
+    constructor(name, technics, description_short, description_detail, image, link) {
+        this.name = name;
+        this.technics = technics;
+        this.description_short = description_short;
+        this.description_detail = description_detail;
+        this.image = image;
+        this.link = link;
+        this.image = `./images/${this.image}`; // Add "./images/" prefix to the image property
+    }
+    static addCard(card) {
+        Project.allCards.push(card); // Add a project card to the array
+    }
+    static createCard(card) {
+        return `
     <div class="col-lg-4">
       <div class="card">
         <a href="${card.link}" target="content" rel="noopener noreferrer" title="Click to open the page in the IFrame below">
           <div class="face front-face">
             <img src="${card.image}" alt="" class="profile">
-            <div class="pt-3 text-uppercase name">
-              ${card.name}
-            </div>
+            <div class="pt-3 text-uppercase name">${card.name}</div>
             <div class="technics">${card.technics}</div>
           </div>
           <div class="face back-face">
-              <strong>${card.description_short}</strong><br>
-              ${card.description_detail}
+            <strong>${card.description_short}</strong><br>${card.description_detail}
           </div>
         </a>
       </div>
     </div>`;
-  }
-  // Define a static method to create the HTML for a project button
-  static createButton(card) {
-    return `
+    }
+    static createButton(card) {
+        return `
     <a class="btn btn-outline-dark text-secondary btn-floating m-1 btnShadow" href="${card.link}" role="button" target="_blank" rel="noopener noreferrer">
     ${card.name}</a>`;
-  }
+    }
 }
-// Define a static array to hold all the project cards
-Project.allCards = [];
-// Define an array of project objects
+Project.allCards = []; // Static array to hold all project cards
+// Array of project objects
 const projects = [
-  new Project("Foodblock", "HTML / SCSS", "Project description:", 'You will create a mobile-friendly website for one of the most popular food blogs out there, fittingly named “Food blog”.<br><br>,Focus on how the pictures are positioned: 3 columns layout for the desktop vs. 1 column layout in the mobile version.', "veaganFoodBlock.png", "FE18-CR1-NetusilThomas/"),
-  new Project("Weekly Planner", "HTML / SCSS / JSON / TypeScript", "Project description:", "In this Code Review, your job is to create a list of Tasks for a “My Weekly Planner” website. Information about the tasks should be stored in a JSON file.<br>Every time the “Importance” button is clicked the Importance should increases by one and the color should change", "weeklyPlanner.png", "FE18-CR2-NetusilThomas/"),
-  new Project("Take Away Restaurtant", "Angular / SCSS", "", "Create at least 7 pages / components: ... The NavBar will be always showing, the same for the Footer. Home and About Us should have static content. Menu will hold dynamic content created from objects. On clicking on the Details button it should lead to the details page ...", "ristoranteOnlineShop.png", "FE18-CR3-NetusilThomas/"),
-  new Project("Alumni website", "Groupwork / Angular / SCSS", "What we need", "The alumni website should consist of five sections: Home page, Alumni directory, Stories, Careers and Events. The purpose of the website is to give all necessary information about alumni", "frontEndProject.png", "front-end-project/"),
-  new Project("Web Library", "PHP / MySQL", "Task:", "As a Full Stack Web Developer you got your first full-stack project, the Big Library web application. The customer wants you to create a big list of all media available in the library (books, CDs, DVDs) and make it available over the web", "theLibrary.png", "BE18-CR4-NetusilThomas/"),
-  new Project("Adopt a Pet", "PHP / MySQL", "Task:", "Create an animal adoption platform to connect users and animals. All users must introduce their first_name and last_name, email, phone_number, address, picture and password in order to register", "adoptAPet.png", "BE18-CR5-NetusilThomas/"),
+    new Project("Foodblock", "HTML / SCSS", "Project description:", 'You will create a mobile-friendly website for one of the most popular food blogs out there, fittingly named “Food blog”.<br><br>,Focus on how the pictures are positioned: 3 columns layout for the desktop vs. 1 column layout in the mobile version.', "veaganFoodBlock.png", "FE18-CR1-NetusilThomas/"),
+    new Project("Weekly Planner", "HTML / SCSS / JSON / TypeScript", "Project description:", "In this Code Review, your job is to create a list of Tasks for a “My Weekly Planner” website. Information about the tasks should be stored in a JSON file.<br>Every time the “Importance” button is clicked the Importance should increases by one and the color should change", "weeklyPlanner.png", "FE18-CR2-NetusilThomas/"),
+    new Project("Take Away Restaurtant", "Angular / SCSS", "", "Create at least 7 pages / components: ... The NavBar will be always showing, the same for the Footer. Home and About Us should have static content. Menu will hold dynamic content created from objects. On clicking on the Details button it should lead to the details page ...", "ristoranteOnlineShop.png", "FE18-CR3-NetusilThomas/"),
+    new Project("Alumni website", "Groupwork / Angular / SCSS", "What we need", "The alumni website should consist of five sections: Home page, Alumni directory, Stories, Careers and Events. The purpose of the website is to give all necessary information about alumni", "frontEndProject.png", "front-end-project/"),
+    new Project("Web Library", "PHP / MySQL", "Task:", "As a Full Stack Web Developer you got your first full-stack project, the Big Library web application. The customer wants you to create a big list of all media available in the library (books, CDs, DVDs) and make it available over the web", "theLibrary.png", "BE18-CR4-NetusilThomas/"),
+    new Project("Adopt a Pet", "PHP / MySQL", "Task:", "Create an animal adoption platform to connect users and animals. All users must introduce their first_name and last_name, email, phone_number, address, picture and password in order to register", "adoptAPet.png", "BE18-CR5-NetusilThomas/"),
 ];
-// Loop through the array of project objects and add each project to the static allCards array of the Project class
+// Add each project to the static allCards array of the Project class
 projects.forEach((project) => {
-  Project.addCard(project);
+    Project.addCard(project);
 });
-// Loop through the array of project objects and create HTML for each Card
+// Create HTML for each Card
 for (let card of Project.allCards) {
-  const cardHtml = Project.createCard(card);
-  resultcards.innerHTML += cardHtml;
-  const buttonHtml = Project.createButton(card);
-  resultbuttons.innerHTML += buttonHtml;
+    const cardHtml = Project.createCard(card);
+    resultcards.innerHTML += cardHtml;
+    const buttonHtml = Project.createButton(card);
+    resultbuttons.innerHTML += buttonHtml;
 }
