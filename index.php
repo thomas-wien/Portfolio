@@ -26,6 +26,7 @@
   <header>
     <h3 class="text-center py-5 titel"><br>business card thomas netusil (to be continued)</h3>
   </header>
+
   <main>
     <div class="accordion" id="accordion">
 
@@ -94,7 +95,6 @@
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
           <div class="accordion-body text-success bg-dark ITtext">
             <!-- the content is created in skills.ts using ID SkillsProgressCircles-->
-            <!-- the values for the percentage values are in _progressbar.scss  -->
             <div id="SkillsProgressCircles" class="row row-cols-1 row-cols-md-2 g-2"></div>
           </div>
         </div>
@@ -110,7 +110,7 @@
             </h3>
           </button>
         </h2>
-        <div id="collapseFour" class="accordion-collapse  text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+        <div id="collapseFour" class="accordion-collapse text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
           <div class="accordion-body text-secondary">
             <!-- Wrapper container -->
             <div class="container py-4">
@@ -144,14 +144,15 @@
             </div>
           </div>
         </div>
+      </section>
     </div>
-    </section>
-
   </main>
+
   <footer>
     <h5 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
     </h5>
   </footer>
+
 </body>
 
 </html>
