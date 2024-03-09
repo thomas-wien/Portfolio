@@ -2,6 +2,7 @@
 @import "./partials/skill";
 @import "./partials/switch";
 @import "./partials/cards";
+@import "./partials/dark_light_toggler";
 
 .container {
   justify-content: center;
@@ -40,18 +41,17 @@
   box-shadow: 0 15px 35px gray
 }
 
+.dropdown-menu .dropdown-item {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
 
-// .accordion-item:nth-child(odd) {
-//   background-image: url('../images/frontEndProject.png');
-// }
+.dropdown-menu .dropdown-item {
+  height: auto;
+  /* oder eine bestimmte Höhe, die Ihren Anforderungen entspricht */
+}
 
-// .accordion-item:nth-child(even) {
-//   background-image: url('../images/ristoranteOnlineShop.png');
-// }
-
-// .accordion-item {
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   background-position: center;
-//   padding: 15px;
-// }
+.theme-icon {
+  width: 1rem;
+  height: 1rem;
+}

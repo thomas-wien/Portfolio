@@ -10,7 +10,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
   <!-- end inculding Bootstrap -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> <!-- Necessary for dark/light mode -->
   <meta name="author" content="Thomas Netusil">
   <meta name="description" content="The Projects and Vita of Thomas Netusil">
   <script src="js/darkLight.js" defer></script> <!-- light/Darkmode switch -->
@@ -48,7 +47,7 @@
               <!-- Cards are created in project.ts -->
 
             </div>
-            <iframe src="../BE18-CR4-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
+            <iframe src="../BE18-CR5-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
             <h3 class="text-center pt-5 titel">click a button to open the page external</h3>
             <p class="titel">in the footer of each page there is a link to the github sources of the project</p>
             <h3 id="ProjectButtons" class="text-center py-5 titel">

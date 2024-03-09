@@ -25,7 +25,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="mx-auto"></div>
+      <div class="mx-auto"></div> <!-- set theme toggler to the right -->
       <ul class="navbar-nav">
         <!-- <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" href="index.php">Home</a>
