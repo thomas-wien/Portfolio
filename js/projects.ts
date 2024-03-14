@@ -25,7 +25,7 @@ class Project implements IProjects {
     public link: string
   ) {
     this.image = `./images/${this.image}`; // Add "./images/" prefix to the image property
-    this.link = `${extLink}/${this.link}`; // Add "./images/" prefix to the image property
+    this.link = `${extLink}/${this.link}`; // Add "./ExtLink/" prefix to the link property to change provider def line 4 to 6
   }
 
   static allCards: Project[] = []; // Static array to hold all project cards
