@@ -14,7 +14,7 @@
   </symbol>
 </svg>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top p-md-2 bg-opacity-75 shadow">
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top p-md-2 bg-opacity-75 shadow">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
