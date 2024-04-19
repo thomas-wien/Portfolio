@@ -1,8 +1,5 @@
-const resultcards = document.getElementById("ProjectCards") as HTMLHtmlElement; // Define where project cards should be displayed
-const resultbuttons = document.getElementById("ProjectButtons") as HTMLHtmlElement; // Define where project buttons should be displayed
-const extLink = "http://localhost/codereview"; // External address for links
-// const extLink = "http://thomas.ariadne.at"; // External address for links
-// const extLink = "https://netusil.codefactory.live"; // external adress ariadne or codefactory
+// const extLink = "http://localhost/codereview"; // External address for links
+const extLink = "http://thomas.ariadne.at"; // External address for links
 
 // Define an interface for project properties
 interface IProjects {
