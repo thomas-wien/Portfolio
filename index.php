@@ -149,7 +149,7 @@
   </main>
 
   <footer>
-    <h5 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
+    <h5 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / AJAX / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
     </h5>
   </footer>
 
