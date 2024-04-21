@@ -1,4 +1,4 @@
-<?php require_once 'mail.php' ?>
+<?php require_once 'inc/mail.php' ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 
@@ -21,7 +21,7 @@
 </head>
 
 <body class="container">
-  <?php include "menue.php" ?>
+  <?php include "inc/menue.php" ?>
 
   <header>
     <h3 class="text-center py-5 titel"><br>business card thomas netusil (to be continued)</h3>
