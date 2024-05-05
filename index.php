@@ -44,9 +44,9 @@
           <!-- remove show to switch of default opening of accordeon -->
           <div class="accordion-body">
             <div id="ProjectCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5 pb-5">
-
+ 
               <!-- Cards are created in project.ts -->
-
+            
             </div>
             <iframe src="../BE18-CR5-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
             <h3 class="text-center pt-5 titel">click a button to open the page external</h3>
