@@ -18,10 +18,8 @@ class Project {
         this.technics = technics;
         this.description_short = description_short;
         this.description_detail = description_detail;
-        this.image = image;
-        this.link = link;
-        this.image = `./images/${this.image}`;
-        this.link = `${extLink}/${this.link}`;
+        this.image = `./images/${image}`;
+        this.link = `${extLink}/${link}`;
     }
     // Method to create HTML card for a project
     createCard() {
@@ -68,13 +66,15 @@ function fetchProjects() {
 function renderProjects(projectsData) {
     const resultcards = document.getElementById("ProjectCards");
     const resultbuttons = document.getElementById("ProjectButtons");
-    resultcards.innerHTML = ''; // Clear existing content
-    resultbuttons.innerHTML = ''; // Clear existing content
-    projectsData.forEach((data) => {
-        const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-        resultcards.innerHTML += project.createCard();
-        resultbuttons.innerHTML += project.createButton();
-    });
+    if (resultcards && resultbuttons) {
+        resultcards.innerHTML = ''; // Clear existing content
+        resultbuttons.innerHTML = ''; // Clear existing content
+        projectsData.forEach((data) => {
+            const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
+            resultcards.innerHTML += project.createCard();
+            resultbuttons.innerHTML += project.createButton();
+        });
+    }
 }
 // Fetch projects data when the page loads
 window.onload = function () {

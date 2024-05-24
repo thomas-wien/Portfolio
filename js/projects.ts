@@ -1,6 +1,6 @@
 // Define external link
 // const extLink = "https://localhost/codereview";
-const extLink = "http://thomas.ariadne.at";
+const extLink: string = "http://thomas.ariadne.at";
 
 // Define an interface for project properties
 interface IProject {
@@ -14,16 +14,27 @@ interface IProject {
 
 // Define a class representing a single project
 class Project implements IProject {
+  name: string;
+  technics: string;
+  description_short: string;
+  description_detail: string;
+  image: string;
+  link: string;
+
   constructor(
-    public name: string,
-    public technics: string,
-    public description_short: string,
-    public description_detail: string,
-    public image: string,
-    public link: string
+    name: string,
+    technics: string,
+    description_short: string,
+    description_detail: string,
+    image: string,
+    link: string
   ) {
-    this.image = `./images/${this.image}`;
-    this.link = `${extLink}/${this.link}`;
+    this.name = name;
+    this.technics = technics;
+    this.description_short = description_short;
+    this.description_detail = description_detail;
+    this.image = `./images/${image}`;
+    this.link = `${extLink}/${link}`;
   }
 
   // Method to create HTML card for a project
@@ -56,7 +67,7 @@ class Project implements IProject {
 // Function to fetch JSON data using fetch API and create Project instances
 async function fetchProjects(): Promise<void> {
   try {
-    const response = await fetch('./js/projects.json');
+    const response: Response = await fetch('./js/projects.json');
     if (!response.ok) {
       throw new Error('Failed to fetch projects data');
     }
@@ -69,21 +80,23 @@ async function fetchProjects(): Promise<void> {
 
 // Function to render projects to HTML
 function renderProjects(projectsData: IProject[]): void {
-  const resultcards = document.getElementById("ProjectCards") as HTMLElement;
-  const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement;
+  const resultcards: HTMLElement | null = document.getElementById("ProjectCards");
+  const resultbuttons: HTMLElement | null = document.getElementById("ProjectButtons");
 
-  resultcards.innerHTML = ''; // Clear existing content
-  resultbuttons.innerHTML = ''; // Clear existing content
+  if (resultcards && resultbuttons) {
+    resultcards.innerHTML = ''; // Clear existing content
+    resultbuttons.innerHTML = ''; // Clear existing content
 
-  projectsData.forEach((data: IProject) => {
-    const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
+    projectsData.forEach((data: IProject) => {
+      const project: Project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
 
-    resultcards.innerHTML += project.createCard();
-    resultbuttons.innerHTML += project.createButton();
-  });
+      resultcards.innerHTML += project.createCard();
+      resultbuttons.innerHTML += project.createButton();
+    });
+  }
 }
 
 // Fetch projects data when the page loads
-window.onload = function () {
+window.onload = function (): void {
   fetchProjects();
 };
