@@ -1,6 +1,16 @@
 "use strict";
-// const extLink = "https://localhost/codereview"; // External address for links
-const extLink = "http://thomas.ariadne.at"; // External address for links
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+// Define external link
+// const extLink = "https://localhost/codereview";
+const extLink = "http://thomas.ariadne.at";
 // Define a class representing a single project
 class Project {
     constructor(name, technics, description_short, description_detail, image, link) {
@@ -38,22 +48,21 @@ class Project {
     ${this.name}</a>`;
     }
 }
-// Function to fetch JSON data using AJAX and create Project instances
+// Function to fetch JSON data using fetch API and create Project instances
 function fetchProjects() {
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const projectsData = JSON.parse(xhr.responseText);
-                renderProjects(projectsData); // Pass projects data to render function
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch('./js/projects.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch projects data');
             }
-            else {
-                console.error('Failed to fetch projects data');
-            }
+            const projectsData = yield response.json();
+            renderProjects(projectsData);
         }
-    };
-    xhr.open('GET', './js/projects.json');
-    xhr.send();
+        catch (error) {
+            console.error(error);
+        }
+    });
 }
 // Function to render projects to HTML
 function renderProjects(projectsData) {
@@ -63,10 +72,8 @@ function renderProjects(projectsData) {
     resultbuttons.innerHTML = ''; // Clear existing content
     projectsData.forEach((data) => {
         const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-        const cardHtml = project.createCard();
-        resultcards.innerHTML += cardHtml;
-        const buttonHtml = project.createButton();
-        resultbuttons.innerHTML += buttonHtml;
+        resultcards.innerHTML += project.createCard();
+        resultbuttons.innerHTML += project.createButton();
     });
 }
 // Fetch projects data when the page loads

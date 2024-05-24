@@ -1,5 +1,6 @@
-// const extLink = "https://localhost/codereview"; // External address for links
-const extLink = "http://thomas.ariadne.at"; // External address for links
+// Define external link
+// const extLink = "https://localhost/codereview";
+const extLink = "http://thomas.ariadne.at";
 
 // Define an interface for project properties
 interface IProject {
@@ -52,27 +53,24 @@ class Project implements IProject {
   }
 }
 
-// Function to fetch JSON data using AJAX and create Project instances
-function fetchProjects(): void {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        const projectsData = JSON.parse(xhr.responseText);
-        renderProjects(projectsData); // Pass projects data to render function
-      } else {
-        console.error('Failed to fetch projects data');
-      }
+// Function to fetch JSON data using fetch API and create Project instances
+async function fetchProjects(): Promise<void> {
+  try {
+    const response = await fetch('./js/projects.json');
+    if (!response.ok) {
+      throw new Error('Failed to fetch projects data');
     }
-  };
-  xhr.open('GET', './js/projects.json');
-  xhr.send();
+    const projectsData: IProject[] = await response.json();
+    renderProjects(projectsData);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // Function to render projects to HTML
 function renderProjects(projectsData: IProject[]): void {
-  const resultcards = document.getElementById("ProjectCards") as HTMLHtmlElement;
-  const resultbuttons = document.getElementById("ProjectButtons") as HTMLHtmlElement;
+  const resultcards = document.getElementById("ProjectCards") as HTMLElement;
+  const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement;
 
   resultcards.innerHTML = ''; // Clear existing content
   resultbuttons.innerHTML = ''; // Clear existing content
@@ -80,11 +78,8 @@ function renderProjects(projectsData: IProject[]): void {
   projectsData.forEach((data: IProject) => {
     const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
 
-    const cardHtml = project.createCard();
-    resultcards.innerHTML += cardHtml;
-
-    const buttonHtml = project.createButton();
-    resultbuttons.innerHTML += buttonHtml;
+    resultcards.innerHTML += project.createCard();
+    resultbuttons.innerHTML += project.createButton();
   });
 }
 
