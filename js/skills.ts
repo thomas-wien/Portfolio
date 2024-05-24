@@ -1,17 +1,15 @@
 // This code defines an array of skills and displays them in the form of progress circles
 // The skills are filtered and grouped by type (frontend, backend, soft skills)
 
-// the perecents of the skills are defined in _skill.scss
-
-// Define the Place in the HTML Document where the Skills will be shown
-const resultskills = document.getElementById("SkillsProgressCircles") as HTMLHtmlElement;
+// Define the place in the HTML document where the skills will be shown
+const resultskills = document.getElementById("SkillsProgressCircles") as HTMLElement | null;
 
 // Define the skill interface
 interface ISkill {
   name: string;
   cssname: string;
   hardOrSoft: boolean; // Hardskill = true
-  skillType: string; // personal professional backend frontend ...
+  skillType: string; // personal, professional, backend, frontend ...
 }
 
 // Define the Skill class
@@ -54,52 +52,44 @@ class Skill implements ISkill {
   }
 }
 
-// Create an array of skills
-const skills = [
-  new Skill("HTML", "html", true, "FrontEnd WebDev Skill"),
-  new Skill("CSS", "css", true, "FrontEnd WebDev Skill"),
-  new Skill("SCSS", "scss", true, "FrontEnd WebDev Skill"),
-  new Skill("JavaScript", "js", true, "FrontEnd WebDev Skill"),
-  new Skill("TypeScript", "ts", true, "FrontEnd WebDev Skill"),
-  new Skill("Angular", "angular", true, "FrontEnd WebDev Skill"),
-  new Skill("MySQL", "mysql", true, "BackEnd WebDev Skill"),
-  new Skill("PHP", "php", true, "BackEnd WebDev Skill"),
-  new Skill("Symfony", "symfony", true, "BackEnd WebDev Skill"),
-  new Skill("communication", "communication", false, "Softskill"),
-  new Skill("teamwork", "teamwork", false, "Softskill"),
-  new Skill("cooperation", "cooperation", false, "Softskill"),
-  new Skill("empathy", "empathy", false, "Softskill"),
-  new Skill("listening", "listening", false, "Softskill"),
-  new Skill("problem solving", "problem", false, "Softskill"),
-];
-
-// Add each skill to the array
-skills.forEach(skill => Skill.addSkill(skill));
+// Fetch skills from JSON file
+async function fetchSkills(): Promise<void> {
+  try {
+    const response = await fetch('./js/skills.json');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch skills data: ${response.statusText}`);
+    }
+    const skillsData: ISkill[] = await response.json();
+    skillsData.forEach(skillData => {
+      const skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
+      Skill.addSkill(skill);
+    });
+    displaySkills();
+  } catch (error) {
+    console.error('Error fetching skills:', error);
+    alert('An error occurred while fetching the skills data. Please try again later.');
+  }
+}
 
 // Generate the web content
-function skill(type: string = "") {
-  // create the Skill Group Head depending on the SkillType
-  function createSkillGroupHead(skillType: string): string {
-    return `<h3 class="bg-dark text-success w-100 text-center"><strong>${skillType}</strong></h3>`;
+function displaySkills(): void {
+  if (!resultskills) {
+    console.error("The element to display skills is not found.");
+    return;
   }
 
-  // Display the Group Head
-  if (type === "FrontEnd WebDev Skill") {
-    resultskills.innerHTML += createSkillGroupHead("Frontend WebDev Skills");
-  } else if (type === "BackEnd WebDev Skill") {
-    resultskills.innerHTML += createSkillGroupHead("Backend WebDev Skills");
-  } else if (type === "Softskill") {
-    resultskills.innerHTML += createSkillGroupHead("My Social Skills");
-  }
+  ["FrontEnd WebDev Skill", "BackEnd WebDev Skill", "Softskill"].forEach(type => {
+    const skillGroupHead: string = Skill.createSkillGroupHead(type);
+    resultskills.innerHTML += skillGroupHead;
 
-  const filteredSkills = Skill.getSkillsByType(type);
-
-  // create the skill progress circle
-  filteredSkills.forEach(val => {
-    resultskills.innerHTML += Skill.createSkillCircle(val);
+    const filteredSkills: Skill[] = Skill.getSkillsByType(type);
+    filteredSkills.forEach((val: Skill) => {
+      resultskills.innerHTML += Skill.createSkillCircle(val);
+    });
   });
 }
 
-skill("FrontEnd WebDev Skill");
-skill("BackEnd WebDev Skill");
-skill("Softskill");
+// Fetch and display skills when the page loads
+window.onload = function (): void {
+  fetchSkills();
+};

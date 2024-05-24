@@ -1,0 +1,92 @@
+[
+  {
+    "name": "HTML",
+    "cssname": "html",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "CSS",
+    "cssname": "css",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "SCSS",
+    "cssname": "scss",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "JavaScript",
+    "cssname": "js",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "TypeScript",
+    "cssname": "ts",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "Angular",
+    "cssname": "angular",
+    "hardOrSoft": true,
+    "skillType": "FrontEnd WebDev Skill"
+  },
+  {
+    "name": "MySQL",
+    "cssname": "mysql",
+    "hardOrSoft": true,
+    "skillType": "BackEnd WebDev Skill"
+  },
+  {
+    "name": "PHP",
+    "cssname": "php",
+    "hardOrSoft": true,
+    "skillType": "BackEnd WebDev Skill"
+  },
+  {
+    "name": "Symfony",
+    "cssname": "symfony",
+    "hardOrSoft": true,
+    "skillType": "BackEnd WebDev Skill"
+  },
+  {
+    "name": "communication",
+    "cssname": "communication",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  },
+  {
+    "name": "teamwork",
+    "cssname": "teamwork",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  },
+  {
+    "name": "cooperation",
+    "cssname": "cooperation",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  },
+  {
+    "name": "empathy",
+    "cssname": "empathy",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  },
+  {
+    "name": "listening",
+    "cssname": "listening",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  },
+  {
+    "name": "problem solving",
+    "cssname": "problem",
+    "hardOrSoft": false,
+    "skillType": "Softskill"
+  }
+]
