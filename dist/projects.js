@@ -44,10 +44,8 @@ var Project = /** @class */ (function () {
         this.technics = technics;
         this.description_short = description_short;
         this.description_detail = description_detail;
-        this.image = image;
-        this.link = link;
-        this.image = "./images/".concat(this.image);
-        this.link = "".concat(extLink, "/").concat(this.link);
+        this.image = "./images/".concat(image);
+        this.link = "".concat(extLink, "/").concat(link);
     }
     // Method to create HTML card for a project
     Project.prototype.createCard = function () {
@@ -72,7 +70,7 @@ export function fetchProjects() {
                 case 1:
                     response = _a.sent();
                     if (!response.ok) {
-                        throw new Error('Failed to fetch projects data');
+                        throw new Error("Failed to fetch projects data: ".concat(response.statusText));
                     }
                     return [4 /*yield*/, response.json()];
                 case 2:
@@ -81,7 +79,8 @@ export function fetchProjects() {
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
-                    console.error(error_1);
+                    console.error('Error fetching projects data:', error_1);
+                    alert('An error occurred while fetching the projects data. Please try again later.');
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
             }
@@ -96,13 +95,15 @@ export function renderProjects(projectsData) {
         console.error("The elements to display projects are not found.");
         return;
     }
-    resultcards.innerHTML = ''; // Clear existing content
-    resultbuttons.innerHTML = ''; // Clear existing content
+    var cardsHtml = ''; // Collect all cards HTML
+    var buttonsHtml = ''; // Collect all buttons HTML
     projectsData.forEach(function (data) {
         var project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-        resultcards.innerHTML += project.createCard();
-        resultbuttons.innerHTML += project.createButton();
+        cardsHtml += project.createCard();
+        buttonsHtml += project.createButton();
     });
+    resultcards.innerHTML = cardsHtml; // Assign all cards at once
+    resultbuttons.innerHTML = buttonsHtml; // Assign all buttons at once
 }
 // Fetch projects data when the page loads
 window.onload = function () {

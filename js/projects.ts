@@ -14,16 +14,27 @@ export interface IProject {
 
 // Define a class representing a single project
 export class Project implements IProject {
+  name: string;
+  technics: string;
+  description_short: string;
+  description_detail: string;
+  image: string;
+  link: string;
+
   constructor(
-    public name: string,
-    public technics: string,
-    public description_short: string,
-    public description_detail: string,
-    public image: string,
-    public link: string
+    name: string,
+    technics: string,
+    description_short: string,
+    description_detail: string,
+    image: string,
+    link: string
   ) {
-    this.image = `./images/${this.image}`;
-    this.link = `${extLink}/${this.link}`;
+    this.name = name;
+    this.technics = technics;
+    this.description_short = description_short;
+    this.description_detail = description_detail;
+    this.image = `./images/${image}`;
+    this.link = `${extLink}/${link}`;
   }
 
   // Method to create HTML card for a project
@@ -58,12 +69,13 @@ export async function fetchProjects(): Promise<void> {
   try {
     const response = await fetch('./js/projects.json');
     if (!response.ok) {
-      throw new Error('Failed to fetch projects data');
+      throw new Error(`Failed to fetch projects data: ${response.statusText}`);
     }
     const projectsData: IProject[] = await response.json();
     renderProjects(projectsData);
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching projects data:', error);
+    alert('An error occurred while fetching the projects data. Please try again later.');
   }
 }
 
@@ -77,15 +89,17 @@ export function renderProjects(projectsData: IProject[]): void {
     return;
   }
 
-  resultcards.innerHTML = ''; // Clear existing content
-  resultbuttons.innerHTML = ''; // Clear existing content
+  let cardsHtml = ''; // Collect all cards HTML
+  let buttonsHtml = ''; // Collect all buttons HTML
 
   projectsData.forEach((data: IProject) => {
     const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-
-    resultcards.innerHTML += project.createCard();
-    resultbuttons.innerHTML += project.createButton();
+    cardsHtml += project.createCard();
+    buttonsHtml += project.createButton();
   });
+
+  resultcards.innerHTML = cardsHtml; // Assign all cards at once
+  resultbuttons.innerHTML = buttonsHtml; // Assign all buttons at once
 }
 
 // Fetch projects data when the page loads
