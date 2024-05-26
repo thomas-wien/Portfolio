@@ -41,7 +41,7 @@ export class Skill implements ISkill {
     return `
       <div class="progressbar mx-auto">
         <svg class="progressbar__svg">
-          <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"> </circle>
+          <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"></circle>
         </svg>
         <span class="progressbar__text shadow-${skill.cssname}">${skill.name}</span>
       </div>
@@ -75,15 +75,19 @@ export function displaySkills(): void {
     return;
   }
 
+  const skillHtml: string[] = [];
+
   ["FrontEnd WebDev Skill", "BackEnd WebDev Skill", "Softskill"].forEach(type => {
     const skillGroupHead: string = Skill.createSkillGroupHead(type);
-    resultskills.innerHTML += skillGroupHead;
+    skillHtml.push(skillGroupHead);
 
     const filteredSkills: Skill[] = Skill.getSkillsByType(type);
     filteredSkills.forEach((val: Skill) => {
-      resultskills.innerHTML += Skill.createSkillCircle(val);
+      skillHtml.push(Skill.createSkillCircle(val));
     });
   });
+
+  resultskills.innerHTML = skillHtml.join('');
 }
 
 // Fetch and display skills when the page loads

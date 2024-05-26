@@ -58,7 +58,7 @@ var Skill = /** @class */ (function () {
     };
     // Create the skill progress circle
     Skill.createSkillCircle = function (skill) {
-        return "\n      <div class=\"progressbar mx-auto\">\n        <svg class=\"progressbar__svg\">\n          <circle cx=\"80\" cy=\"80\" r=\"70\" class=\"progressbar__svg-circle circle-".concat(skill.cssname, " shadow-").concat(skill.cssname, "\"> </circle>\n        </svg>\n        <span class=\"progressbar__text shadow-").concat(skill.cssname, "\">").concat(skill.name, "</span>\n      </div>\n    ");
+        return "\n      <div class=\"progressbar mx-auto\">\n        <svg class=\"progressbar__svg\">\n          <circle cx=\"80\" cy=\"80\" r=\"70\" class=\"progressbar__svg-circle circle-".concat(skill.cssname, " shadow-").concat(skill.cssname, "\"></circle>\n        </svg>\n        <span class=\"progressbar__text shadow-").concat(skill.cssname, "\">").concat(skill.name, "</span>\n      </div>\n    ");
     };
     // Define an array to hold the skills
     Skill.allSkills = [];
@@ -104,14 +104,16 @@ export function displaySkills() {
         console.error("The element to display skills is not found.");
         return;
     }
+    var skillHtml = [];
     ["FrontEnd WebDev Skill", "BackEnd WebDev Skill", "Softskill"].forEach(function (type) {
         var skillGroupHead = Skill.createSkillGroupHead(type);
-        resultskills.innerHTML += skillGroupHead;
+        skillHtml.push(skillGroupHead);
         var filteredSkills = Skill.getSkillsByType(type);
         filteredSkills.forEach(function (val) {
-            resultskills.innerHTML += Skill.createSkillCircle(val);
+            skillHtml.push(Skill.createSkillCircle(val));
         });
     });
+    resultskills.innerHTML = skillHtml.join('');
 }
 // Fetch and display skills when the page loads
 window.onload = function () {
