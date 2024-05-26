@@ -1,20 +1,32 @@
-# Anwenderdokumentation
+# Portfolio von Thomas Netusil
 
-Die Webseite "Portfolio Thomas Netusil" bietet einen umfassenden Überblick über die Projekte, Zertifikate und Fähigkeiten von Thomas Netusil. Sie können durch die verschiedenen Abschnitte der Webseite navigieren, um mehr über die Arbeit von Thomas zu erfahren.
+## Übersicht
+Dies ist das Portfolio-Projekt von Thomas Netusil, das verschiedene Webentwicklungsfähigkeiten und -projekte zeigt. Es umfasst sowohl Frontend- als auch Backend-Technologien und bietet eine interaktive Benutzeroberfläche zur Darstellung der Fähigkeiten und Projekte.
 
-## Navigation:
+## Eigenschaften
+- **Projekte**: Anzeige von Projekten mit detaillierten Beschreibungen und Links.
+- **Fähigkeiten**: Anzeige von Fähigkeiten mit Fortschrittskreisen, die den Kenntnisstand visualisieren.
+- **Modulare Struktur**: Verwendung von TypeScript-Klassen und -Modulen für sauberen und wartbaren Code.
+- **JSON-Daten**: Projekte und Fähigkeiten werden aus JSON-Dateien geladen, was die Datenverwaltung erleichtert.
 
-Die Navigation durch die Webseite erfolgt über die Abschnitte, die als Akkordeons organisiert sind. Jeder Abschnitt behandelt ein bestimmtes Thema:
+## Technologien
+- **Frontend**: HTML, CSS, JavaScript, TypeScript, Angular
+- **Backend**: PHP, MySQL, Symfony
 
-1. **Projekte**: Hier finden Sie eine Liste von Projekten, an denen Thomas gearbeitet hat. Durch Klicken auf die Projektbuttons können Sie weitere Informationen zu den einzelnen Projekten erhalten.
 
-2. **Zertifikate und Zeugnisse**: Dieser Abschnitt zeigt Zertifikate und Zeugnisse, die Thomas erhalten hat, als PDF-Dateien.
+-----------------
 
-3. **Fähigkeiten**: Hier können Sie mehr über die sozialen und beruflichen Fähigkeiten von Thomas erfahren. Die Fähigkeiten werden als Kreise mit Prozentwerten dargestellt.
+# Portfolio by Thomas Netusil
 
-4. **Kontakt**: Wenn Sie mehr Informationen benötigen oder Kontakt mit Thomas aufnehmen möchten, können Sie das Kontaktformular verwenden.
+## Overview
+This is the portfolio project of Thomas Netusil, showcasing various web development skills and projects. It includes both frontend and backend technologies and offers an interactive user interface to display skills and projects.
 
-## Weitere Hinweise:
+## Features
+- **Projects**: Display of projects with detailed descriptions and links.
+- **Skills**: Display of skills with progress circles visualizing proficiency levels.
+- **Modular Structure**: Use of TypeScript classes and modules for clean and maintainable code.
+- **JSON Data**: Projects and skills are loaded from JSON files, simplifying data management.
 
-- Die Webseite enthält auch einen Schalter zum Wechseln zwischen dem hellen und dunklen Modus.
-- Alle Projekte und Fähigkeiten werden dynamisch geladen und aktualisiert.
+## Technologies
+- **Frontend**: HTML, CSS, JavaScript, TypeScript, Angular
+- **Backend**: PHP, MySQL, Symfony
