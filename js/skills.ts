@@ -1,11 +1,8 @@
-// This code defines an array of skills and displays them in the form of progress circles
-// The skills are filtered and grouped by type (frontend, backend, soft skills)
-
 // Define the place in the HTML document where the skills will be shown
 const resultskills = document.getElementById("SkillsProgressCircles") as HTMLElement | null;
 
 // Define the skill interface
-interface ISkill {
+export interface ISkill {
   name: string;
   cssname: string;
   hardOrSoft: boolean; // Hardskill = true
@@ -13,7 +10,7 @@ interface ISkill {
 }
 
 // Define the Skill class
-class Skill implements ISkill {
+export class Skill implements ISkill {
   constructor(
     public name: string,
     public cssname: string,
@@ -53,7 +50,7 @@ class Skill implements ISkill {
 }
 
 // Fetch skills from JSON file
-async function fetchSkills(): Promise<void> {
+export async function fetchSkills(): Promise<void> {
   try {
     const response = await fetch('./js/skills.json');
     if (!response.ok) {
@@ -72,7 +69,7 @@ async function fetchSkills(): Promise<void> {
 }
 
 // Generate the web content
-function displaySkills(): void {
+export function displaySkills(): void {
   if (!resultskills) {
     console.error("The element to display skills is not found.");
     return;

@@ -3,7 +3,7 @@
 const extLink: string = "http://thomas.ariadne.at";
 
 // Define an interface for project properties
-interface IProject {
+export interface IProject {
   name: string;
   technics: string;
   description_short: string;
@@ -13,28 +13,17 @@ interface IProject {
 }
 
 // Define a class representing a single project
-class Project implements IProject {
-  name: string;
-  technics: string;
-  description_short: string;
-  description_detail: string;
-  image: string;
-  link: string;
-
+export class Project implements IProject {
   constructor(
-    name: string,
-    technics: string,
-    description_short: string,
-    description_detail: string,
-    image: string,
-    link: string
+    public name: string,
+    public technics: string,
+    public description_short: string,
+    public description_detail: string,
+    public image: string,
+    public link: string
   ) {
-    this.name = name;
-    this.technics = technics;
-    this.description_short = description_short;
-    this.description_detail = description_detail;
-    this.image = `./images/${image}`;
-    this.link = `${extLink}/${link}`;
+    this.image = `./images/${this.image}`;
+    this.link = `${extLink}/${this.link}`;
   }
 
   // Method to create HTML card for a project
@@ -65,9 +54,9 @@ class Project implements IProject {
 }
 
 // Function to fetch JSON data using fetch API and create Project instances
-async function fetchProjects(): Promise<void> {
+export async function fetchProjects(): Promise<void> {
   try {
-    const response: Response = await fetch('./js/projects.json');
+    const response = await fetch('./js/projects.json');
     if (!response.ok) {
       throw new Error('Failed to fetch projects data');
     }
@@ -79,21 +68,24 @@ async function fetchProjects(): Promise<void> {
 }
 
 // Function to render projects to HTML
-function renderProjects(projectsData: IProject[]): void {
-  const resultcards: HTMLElement | null = document.getElementById("ProjectCards");
-  const resultbuttons: HTMLElement | null = document.getElementById("ProjectButtons");
+export function renderProjects(projectsData: IProject[]): void {
+  const resultcards = document.getElementById("ProjectCards") as HTMLElement | null;
+  const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement | null;
 
-  if (resultcards && resultbuttons) {
-    resultcards.innerHTML = ''; // Clear existing content
-    resultbuttons.innerHTML = ''; // Clear existing content
-
-    projectsData.forEach((data: IProject) => {
-      const project: Project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-
-      resultcards.innerHTML += project.createCard();
-      resultbuttons.innerHTML += project.createButton();
-    });
+  if (!resultcards || !resultbuttons) {
+    console.error("The elements to display projects are not found.");
+    return;
   }
+
+  resultcards.innerHTML = ''; // Clear existing content
+  resultbuttons.innerHTML = ''; // Clear existing content
+
+  projectsData.forEach((data: IProject) => {
+    const project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
+
+    resultcards.innerHTML += project.createCard();
+    resultbuttons.innerHTML += project.createButton();
+  });
 }
 
 // Fetch projects data when the page loads

@@ -14,8 +14,9 @@
   <meta name="author" content="Thomas Netusil">
   <meta name="description" content="The Projects and Vita of Thomas Netusil">
   <script src="js/darkLight.js" defer></script> <!-- light/Darkmode switch -->
-  <script src="js/projects.js" defer></script> <!-- Necessary for the Project Cards -->
-  <script src="js/skills.js" defer></script> <!-- Necessary for the Skills -->
+  <script src="dist/bundle.js" defer></script>
+ <!-- <script src="js/projects.js" defer></script>--> <!-- Necessary for the Project Cards -->
+  <!--<script src="js/skills.js" defer></script>--> <!-- Necessary for the Skills -->
   <link href="favicon.ico" rel="icon">
   <title>Portfolio Thomas Netusil</title>
 </head>
@@ -149,8 +150,8 @@
   </main>
 
   <footer>
-    <h6 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
-    </h6>
+    <h5 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / AJAX / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
+    </h5>
   </footer>
 
 </body>
