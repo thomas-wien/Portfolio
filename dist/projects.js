@@ -44,21 +44,29 @@ var Project = /** @class */ (function () {
         this.technics = technics;
         this.description_short = description_short;
         this.description_detail = description_detail;
+        this.image = image;
+        this.link = link;
         this.image = "./images/".concat(image);
         this.link = "".concat(extLink, "/").concat(link);
     }
-    // Method to create HTML card for a project
-    Project.prototype.createCard = function () {
-        return "\n    <div class=\"col-lg-4\">\n      <div class=\"card\">\n        <a href=\"".concat(this.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n          <div class=\"face front-face\">\n            <img src=\"").concat(this.image, "\" alt=\"\" class=\"profile\">\n            <div class=\"pt-3 text-uppercase name\">").concat(this.name, "</div>\n            <div class=\"technics\">").concat(this.technics, "</div>\n          </div>\n          <div class=\"face back-face\">\n            <strong>").concat(this.description_short, "</strong><br>").concat(this.description_detail, "\n          </div>\n        </a>\n      </div>\n    </div>");
+    // Automatically push the projects to the array 
+    Project.addProject = function (project) {
+        Project.allProjects.push(project);
     };
-    // Method to create HTML button for a project
-    Project.prototype.createButton = function () {
-        return "\n    <a class=\"btn btn-outline-dark text-secondary btn-floating m-1 btnShadow\" href=\"".concat(this.link, "\" role=\"button\" target=\"_blank\" rel=\"noopener noreferrer\">\n    ").concat(this.name, "</a>");
+    // Create the project card
+    Project.createProjectCard = function (project) {
+        return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
     };
+    // Create the project button
+    Project.createProjectButton = function (project) {
+        return "\n      <a class=\"btn btn-outline-dark text-secondary btn-floating m-1 btnShadow\" href=\"".concat(project.link, "\" role=\"button\" target=\"_blank\" rel=\"noopener noreferrer\">\n      ").concat(project.name, "</a>");
+    };
+    // Define an array to hold the projects
+    Project.allProjects = [];
     return Project;
 }());
 export { Project };
-// Function to fetch JSON data using fetch API and create Project instances
+// Fetch projects from JSON file
 export function fetchProjects() {
     return __awaiter(this, void 0, void 0, function () {
         var response, projectsData, error_1;
@@ -70,12 +78,16 @@ export function fetchProjects() {
                 case 1:
                     response = _a.sent();
                     if (!response.ok) {
-                        throw new Error("Failed to fetch projects data: ".concat(response.statusText));
+                        throw new Error('Failed to fetch projects data');
                     }
                     return [4 /*yield*/, response.json()];
                 case 2:
                     projectsData = _a.sent();
-                    renderProjects(projectsData);
+                    projectsData.forEach(function (projectData) {
+                        var project = new Project(projectData.name, projectData.technics, projectData.description_short, projectData.description_detail, projectData.image, projectData.link);
+                        Project.addProject(project);
+                    });
+                    displayProjects();
                     return [3 /*break*/, 4];
                 case 3:
                     error_1 = _a.sent();
@@ -87,8 +99,8 @@ export function fetchProjects() {
         });
     });
 }
-// Function to render projects to HTML
-export function renderProjects(projectsData) {
+// Generate the web content
+export function displayProjects() {
     var resultcards = document.getElementById("ProjectCards");
     var resultbuttons = document.getElementById("ProjectButtons");
     if (!resultcards || !resultbuttons) {
@@ -97,15 +109,14 @@ export function renderProjects(projectsData) {
     }
     var cardsHtml = ''; // Collect all cards HTML
     var buttonsHtml = ''; // Collect all buttons HTML
-    projectsData.forEach(function (data) {
-        var project = new Project(data.name, data.technics, data.description_short, data.description_detail, data.image, data.link);
-        cardsHtml += project.createCard();
-        buttonsHtml += project.createButton();
+    Project.allProjects.forEach(function (project) {
+        cardsHtml += Project.createProjectCard(project);
+        buttonsHtml += Project.createProjectButton(project);
     });
     resultcards.innerHTML = cardsHtml; // Assign all cards at once
     resultbuttons.innerHTML = buttonsHtml; // Assign all buttons at once
 }
-// Fetch projects data when the page loads
+// Fetch and display projects when the page loads
 window.onload = function () {
     fetchProjects();
 };

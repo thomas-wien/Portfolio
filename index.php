@@ -8,15 +8,12 @@
   <!-- inculding Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">-->
   <!-- end inculding Bootstrap -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <meta name="author" content="Thomas Netusil">
   <meta name="description" content="The Projects and Vita of Thomas Netusil">
   <script src="js/darkLight.js" defer></script> <!-- light/Darkmode switch -->
-  <script src="dist/bundle.js" defer></script>
- <!-- <script src="js/projects.js" defer></script>--> <!-- Necessary for the Project Cards -->
-  <!--<script src="js/skills.js" defer></script>--> <!-- Necessary for the Skills -->
+  <script src="dist/bundle.js" defer></script> <!-- Necessary for the Project Cards and Skills -->
   <link href="favicon.ico" rel="icon">
   <title>Portfolio Thomas Netusil</title>
 </head>
