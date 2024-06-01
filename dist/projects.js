@@ -44,18 +44,24 @@ var Project = /** @class */ (function () {
         this.technics = technics;
         this.description_short = description_short;
         this.description_detail = description_detail;
-        this.image = image;
-        this.link = link;
-        this.image = "./images/".concat(image);
-        this.link = "".concat(extLink, "/").concat(link);
+        this.image = Project.constructImageUrl(image);
+        this.link = Project.constructLinkUrl(link);
     }
+    // Static method to construct the image URL
+    Project.constructImageUrl = function (image) {
+        return "./images/".concat(image);
+    };
+    // Static method to construct the link URL
+    Project.constructLinkUrl = function (link) {
+        return "".concat(extLink, "/").concat(link);
+    };
     // Automatically push the projects to the array 
     Project.addProject = function (project) {
         Project.allProjects.push(project);
     };
     // Create the project card
     Project.createProjectCard = function (project) {
-        return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
+        return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"").concat(project.name, " image\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
     };
     // Create the project button
     Project.createProjectButton = function (project) {
@@ -83,9 +89,18 @@ export function fetchProjects() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     projectsData = _a.sent();
+                    // Type check for JSON data
+                    if (!Array.isArray(projectsData)) {
+                        throw new Error('Projects data is not an array');
+                    }
                     projectsData.forEach(function (projectData) {
-                        var project = new Project(projectData.name, projectData.technics, projectData.description_short, projectData.description_detail, projectData.image, projectData.link);
-                        Project.addProject(project);
+                        if (isValidProject(projectData)) {
+                            var project = new Project(projectData.name, projectData.technics, projectData.description_short, projectData.description_detail, projectData.image, projectData.link);
+                            Project.addProject(project);
+                        }
+                        else {
+                            console.warn('Invalid project data:', projectData);
+                        }
                     });
                     displayProjects();
                     return [3 /*break*/, 4];
@@ -99,6 +114,15 @@ export function fetchProjects() {
         });
     });
 }
+// Validate project data
+function isValidProject(data) {
+    return typeof data.name === 'string' &&
+        typeof data.technics === 'string' &&
+        typeof data.description_short === 'string' &&
+        typeof data.description_detail === 'string' &&
+        typeof data.image === 'string' &&
+        typeof data.link === 'string';
+}
 // Generate the web content
 export function displayProjects() {
     var resultcards = document.getElementById("ProjectCards");
@@ -107,14 +131,10 @@ export function displayProjects() {
         console.error("The elements to display projects are not found.");
         return;
     }
-    var cardsHtml = ''; // Collect all cards HTML
-    var buttonsHtml = ''; // Collect all buttons HTML
-    Project.allProjects.forEach(function (project) {
-        cardsHtml += Project.createProjectCard(project);
-        buttonsHtml += Project.createProjectButton(project);
-    });
-    resultcards.innerHTML = cardsHtml; // Assign all cards at once
-    resultbuttons.innerHTML = buttonsHtml; // Assign all buttons at once
+    var cardsHtml = Project.allProjects.map(function (project) { return Project.createProjectCard(project); }).join('');
+    var buttonsHtml = Project.allProjects.map(function (project) { return Project.createProjectButton(project); }).join('');
+    resultcards.innerHTML = cardsHtml;
+    resultbuttons.innerHTML = buttonsHtml;
 }
 // Fetch and display projects when the page loads
 window.onload = function () {

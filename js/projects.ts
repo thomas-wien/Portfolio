@@ -14,16 +14,29 @@ export interface IProject {
 
 // Define a class representing a single project
 export class Project implements IProject {
+  public image: string;
+  public link: string;
+
   constructor(
     public name: string,
     public technics: string,
     public description_short: string,
     public description_detail: string,
-    public image: string,
-    public link: string
+    image: string,
+    link: string
   ) {
-    this.image = `./images/${image}`;
-    this.link = `${extLink}/${link}`;
+    this.image = Project.constructImageUrl(image);
+    this.link = Project.constructLinkUrl(link);
+  }
+
+  // Static method to construct the image URL
+  static constructImageUrl(image: string): string {
+    return `./images/${image}`;
+  }
+
+  // Static method to construct the link URL
+  static constructLinkUrl(link: string): string {
+    return `${extLink}/${link}`;
   }
 
   // Define an array to hold the projects
@@ -41,7 +54,7 @@ export class Project implements IProject {
         <div class="card">
           <a href="${project.link}" target="content" rel="noopener noreferrer" title="Click to open the page in the IFrame below">
             <div class="face front-face">
-              <img src="${project.image}" alt="" class="profile">
+              <img src="${project.image}" alt="${project.name} image" class="profile">
               <div class="pt-3 text-uppercase name">${project.name}</div>
               <div class="technics">${project.technics}</div>
             </div>
@@ -69,15 +82,43 @@ export async function fetchProjects(): Promise<void> {
       throw new Error('Failed to fetch projects data');
     }
     const projectsData: IProject[] = await response.json();
+
+    // Type check for JSON data
+    if (!Array.isArray(projectsData)) {
+      throw new Error('Projects data is not an array');
+    }
+
     projectsData.forEach(projectData => {
-      const project = new Project(projectData.name, projectData.technics, projectData.description_short, projectData.description_detail, projectData.image, projectData.link);
-      Project.addProject(project);
+      if (isValidProject(projectData)) {
+        const project = new Project(
+          projectData.name,
+          projectData.technics,
+          projectData.description_short,
+          projectData.description_detail,
+          projectData.image,
+          projectData.link
+        );
+        Project.addProject(project);
+      } else {
+        console.warn('Invalid project data:', projectData);
+      }
     });
+
     displayProjects();
   } catch (error) {
     console.error('Error fetching projects data:', error);
     alert('An error occurred while fetching the projects data. Please try again later.');
   }
+}
+
+// Validate project data
+function isValidProject(data: any): data is IProject {
+  return typeof data.name === 'string' &&
+    typeof data.technics === 'string' &&
+    typeof data.description_short === 'string' &&
+    typeof data.description_detail === 'string' &&
+    typeof data.image === 'string' &&
+    typeof data.link === 'string';
 }
 
 // Generate the web content
@@ -90,16 +131,11 @@ export function displayProjects(): void {
     return;
   }
 
-  let cardsHtml = ''; // Collect all cards HTML
-  let buttonsHtml = ''; // Collect all buttons HTML
+  const cardsHtml = Project.allProjects.map(project => Project.createProjectCard(project)).join('');
+  const buttonsHtml = Project.allProjects.map(project => Project.createProjectButton(project)).join('');
 
-  Project.allProjects.forEach((project: Project) => {
-    cardsHtml += Project.createProjectCard(project);
-    buttonsHtml += Project.createProjectButton(project);
-  });
-
-  resultcards.innerHTML = cardsHtml; // Assign all cards at once
-  resultbuttons.innerHTML = buttonsHtml; // Assign all buttons at once
+  resultcards.innerHTML = cardsHtml;
+  resultbuttons.innerHTML = buttonsHtml;
 }
 
 // Fetch and display projects when the page loads

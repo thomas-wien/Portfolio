@@ -22,7 +22,8 @@
   <?php include "inc/menue.php" ?>
 
   <header>
-    <h3 class="text-center py-5 titel"><br>business card thomas netusil (to be continued)</h3>
+    <h2 class="text-center titel mt-5 pt-3">thomas netusil</h2>
+    <p class="text-center titel mb-4">fullstack web developer</p>
   </header>
 
   <main>
@@ -63,8 +64,7 @@
       <section class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button bg-secondary text-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h3 class="text-center py-5 titel bg-secondary text-light w-100">my certifications and certificates of
-              service (selection)
+            <h3 class="text-center py-5 titel bg-secondary text-light w-100">my certifications and certificates of service (selection)
               <br>
             </h3>
           </button>
