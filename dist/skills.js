@@ -82,9 +82,18 @@ export function fetchSkills() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     skillsData = _a.sent();
+                    // Type check for JSON data
+                    if (!Array.isArray(skillsData)) {
+                        throw new Error('Skills data is not an array');
+                    }
                     skillsData.forEach(function (skillData) {
-                        var skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
-                        Skill.addSkill(skill);
+                        if (isValidSkill(skillData)) {
+                            var skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
+                            Skill.addSkill(skill);
+                        }
+                        else {
+                            console.warn('Invalid skill data:', skillData);
+                        }
                     });
                     displaySkills();
                     return [3 /*break*/, 4];
@@ -97,6 +106,13 @@ export function fetchSkills() {
             }
         });
     });
+}
+// Validate skill data
+function isValidSkill(data) {
+    return typeof data.name === 'string' &&
+        typeof data.cssname === 'string' &&
+        typeof data.hardOrSoft === 'boolean' &&
+        typeof data.skillType === 'string';
 }
 // Generate the web content
 export function displaySkills() {

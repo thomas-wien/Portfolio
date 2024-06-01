@@ -57,15 +57,33 @@ export async function fetchSkills(): Promise<void> {
       throw new Error(`Failed to fetch skills data: ${response.statusText}`);
     }
     const skillsData: ISkill[] = await response.json();
+
+    // Type check for JSON data
+    if (!Array.isArray(skillsData)) {
+      throw new Error('Skills data is not an array');
+    }
+
     skillsData.forEach(skillData => {
-      const skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
-      Skill.addSkill(skill);
+      if (isValidSkill(skillData)) {
+        const skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
+        Skill.addSkill(skill);
+      } else {
+        console.warn('Invalid skill data:', skillData);
+      }
     });
     displaySkills();
   } catch (error) {
     console.error('Error fetching skills:', error);
     alert('An error occurred while fetching the skills data. Please try again later.');
   }
+}
+
+// Validate skill data
+function isValidSkill(data: any): data is ISkill {
+  return typeof data.name === 'string' &&
+    typeof data.cssname === 'string' &&
+    typeof data.hardOrSoft === 'boolean' &&
+    typeof data.skillType === 'string';
 }
 
 // Generate the web content
