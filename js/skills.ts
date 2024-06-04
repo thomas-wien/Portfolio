@@ -1,12 +1,15 @@
 // Define the place in the HTML document where the skills will be shown
 const resultskills = document.getElementById("SkillsProgressCircles") as HTMLElement | null;
 
+// Define a type for skill categories
+type SkillType = "FrontEnd WebDev Skill" | "BackEnd WebDev Skill" | "Softskill";
+
 // Define the skill interface
 export interface ISkill {
   name: string;
   cssname: string;
   hardOrSoft: boolean; // Hardskill = true
-  skillType: string; // personal, professional, backend, frontend ...
+  skillType: SkillType;
 }
 
 // Define the Skill class
@@ -15,7 +18,7 @@ export class Skill implements ISkill {
     public name: string,
     public cssname: string,
     public hardOrSoft: boolean,
-    public skillType: string
+    public skillType: SkillType
   ) { }
 
   // Define an array to hold the skills
@@ -27,12 +30,12 @@ export class Skill implements ISkill {
   }
 
   // Filter the skills by type (frontend, backend, soft skills)
-  static getSkillsByType(type: string): Skill[] {
+  static getSkillsByType(type: SkillType): Skill[] {
     return Skill.allSkills.filter(skill => skill.skillType === type);
   }
 
   // Create the Skill Group Head depending on the SkillType 
-  static createSkillGroupHead(skillType: string): string {
+  static createSkillGroupHead(skillType: SkillType): string {
     return `<h3 class="bg-dark text-success w-100 text-center"><strong>${skillType}</strong></h3>`;
   }
 
@@ -83,7 +86,9 @@ function isValidSkill(data: any): data is ISkill {
   return typeof data.name === 'string' &&
     typeof data.cssname === 'string' &&
     typeof data.hardOrSoft === 'boolean' &&
-    typeof data.skillType === 'string';
+    (data.skillType === "FrontEnd WebDev Skill" ||
+      data.skillType === "BackEnd WebDev Skill" ||
+      data.skillType === "Softskill");
 }
 
 // Generate the web content
@@ -96,10 +101,10 @@ export function displaySkills(): void {
   const skillHtml: string[] = [];
 
   ["FrontEnd WebDev Skill", "BackEnd WebDev Skill", "Softskill"].forEach(type => {
-    const skillGroupHead: string = Skill.createSkillGroupHead(type);
+    const skillGroupHead: string = Skill.createSkillGroupHead(type as SkillType);
     skillHtml.push(skillGroupHead);
 
-    const filteredSkills: Skill[] = Skill.getSkillsByType(type);
+    const filteredSkills: Skill[] = Skill.getSkillsByType(type as SkillType);
     filteredSkills.forEach((val: Skill) => {
       skillHtml.push(Skill.createSkillCircle(val));
     });

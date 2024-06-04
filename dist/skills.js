@@ -112,7 +112,9 @@ function isValidSkill(data) {
     return typeof data.name === 'string' &&
         typeof data.cssname === 'string' &&
         typeof data.hardOrSoft === 'boolean' &&
-        typeof data.skillType === 'string';
+        (data.skillType === "FrontEnd WebDev Skill" ||
+            data.skillType === "BackEnd WebDev Skill" ||
+            data.skillType === "Softskill");
 }
 // Generate the web content
 export function displaySkills() {
