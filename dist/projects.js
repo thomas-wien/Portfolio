@@ -39,6 +39,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var extLink = "http://thomas.ariadne.at";
 // Define a class representing a single project
 var Project = /** @class */ (function () {
+    /**
+     * Constructs a new Project instance with the given parameters.
+     *
+     * @param {string} name - The name of the project.
+     * @param {string} technics - The technologies used in the project.
+     * @param {string} description_short - A short description of the project.
+     * @param {string} description_detail - A detailed description of the project.
+     * @param {string} image - The URL or file path of the project image.
+     * @param {string} link - The URL or file path of the project link.
+     */
     function Project(name, technics, description_short, description_detail, image, link) {
         this.name = name;
         this.technics = technics;

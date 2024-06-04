@@ -17,6 +17,16 @@ export class Project implements IProject {
   public image: string;
   public link: string;
 
+  /**
+   * Constructs a new Project instance with the given parameters.
+   *
+   * @param {string} name - The name of the project.
+   * @param {string} technics - The technologies used in the project.
+   * @param {string} description_short - A short description of the project.
+   * @param {string} description_detail - A detailed description of the project.
+   * @param {string} image - The URL or file path of the project image.
+   * @param {string} link - The URL or file path of the project link.
+   */
   constructor(
     public name: string,
     public technics: string,

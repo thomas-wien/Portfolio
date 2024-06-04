@@ -2,7 +2,7 @@
 // Make sure the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Set the recipient email address
-  $to = 'thomas.netusil@gmail.com';
+  include_once("inc/mail.txt");
 
   // Get the form data
   $name = $_POST['name'];

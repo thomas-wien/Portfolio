@@ -14,6 +14,14 @@ export interface ISkill {
 
 // Define the Skill class
 export class Skill implements ISkill {
+  /**
+   * Creates a new instance of the Skill class.
+   *
+   * @param {string} name - The name of the skill.
+   * @param {string} cssname - The CSS name of the skill.
+   * @param {boolean} hardOrSoft - Indicates whether the skill is a hard skill or a soft skill.
+   * @param {SkillType} skillType - The type of the skill.
+   */
   constructor(
     public name: string,
     public cssname: string,

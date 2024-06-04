@@ -38,6 +38,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var resultskills = document.getElementById("SkillsProgressCircles");
 // Define the Skill class
 var Skill = /** @class */ (function () {
+    /**
+     * Creates a new instance of the Skill class.
+     *
+     * @param {string} name - The name of the skill.
+     * @param {string} cssname - The CSS name of the skill.
+     * @param {boolean} hardOrSoft - Indicates whether the skill is a hard skill or a soft skill.
+     * @param {SkillType} skillType - The type of the skill.
+     */
     function Skill(name, cssname, hardOrSoft, skillType) {
         this.name = name;
         this.cssname = cssname;
