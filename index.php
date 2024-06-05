@@ -98,20 +98,12 @@
         </div>
       </section>
 
-       <!-- Contact Section Starts -->
-    <section class="accordion-item">
+      <!-- Contact Section Starts -->
+      <section class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
             <button class="accordion-button bg-light text-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                 <h3 class="text-center py-5 titel bg-light text-secondary w-100">please contact me for more information<br></h3>
-            </button>
-        </h2>
-        <div id="collapseFour" class="accordion-collapse text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
-            <div class="accordion-body text-secondary">
-                <!-- Wrapper container -->
-                <div class="container py-4">
-                    <!-- Bootstrap 5 starter form -->
-                    <form id="contactForm" method="POST" action="">
-                        <?php if (!empty($errors)): ?>
+                <?php if (!empty($errors)): ?>
                             <div class="alert alert-danger">
                                 <ul>
                                     <?php foreach ($errors as $error): ?>
@@ -124,7 +116,15 @@
                                 <?php echo htmlspecialchars($successMessage); ?>
                             </div>
                         <?php endif; ?>
-
+            </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+            <div class="accordion-body text-secondary">
+                <!-- Wrapper container -->
+                <div class="container py-4">
+                    <!-- Bootstrap 5 starter form -->
+                    <form id="contactForm" method="POST" action="">
+                        
                         <!-- Name input -->
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
@@ -151,7 +151,7 @@
                 </div>
             </div>
         </div>
-    </section>
+      </section>
     </div>
   </main>
 
