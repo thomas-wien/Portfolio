@@ -143,6 +143,12 @@
                             <textarea class="form-control" id="message" name="message" placeholder="Message" style="height: 10rem;"><?php echo isset($message) ? htmlspecialchars($message) : ''; ?></textarea>
                         </div>
 
+                        <!-- Copy to self checkbox -->
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" id="copyToSelf" name="copyToSelf" <?php echo isset($copyToSelf) && $copyToSelf ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="copyToSelf">Send a copy to myself</label>
+                        </div>
+                        
                         <!-- Form submit button -->
                         <div class="d-grid">
                             <button class="btn btn-outline-dark text-secondary btn-lg" type="submit">Submit</button>

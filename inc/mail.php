@@ -4,6 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
     $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
+    $copyToSelf = isset($_POST['copyToSelf']) ? true : false;
 
     $errors = [];
 
@@ -24,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If no errors, send the email
     if (empty($errors)) {
-      include "./inc/mail.txt"; // Replace with your email address
+        include "./inc/mail.txt";
         $subject = "New contact from $name";
         $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
         $headers = [
@@ -33,7 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "Content-Type" => "text/plain; charset=UTF-8"
         ];
 
-        if (mail($to, $subject, $body, $headers, "-f $to")) {
+        $mailSent = mail($to, $subject, $body, $headers);
+
+        if ($mailSent && $copyToSelf) {
+            $copySubject = "Copy of your message to Thomas Netusil";
+            $copyHeaders = [
+                "From" => "no-reply@ariadne.at",
+                "Reply-To" => $to,
+                "Content-Type" => "text/plain; charset=UTF-8"
+            ];
+            $mailSent = mail($email, $copySubject, $body, $copyHeaders);
+        }
+
+        if ($mailSent) {
             $successMessage = "Your message has been sent successfully.";
         } else {
             $errors[] = "There was a problem sending your message. Please try again later.";
