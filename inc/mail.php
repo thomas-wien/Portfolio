@@ -1,27 +1,43 @@
 <?php
-// Make sure the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Set the recipient email address
-  include "./inc/mail.txt";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect and sanitize form data
+    $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
+    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
 
-  // Get the form data
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+    $errors = [];
 
-  // Set the email subject and message body
-  $subject = 'New message from ' . $name;
-  $body = "Name: $name\nEmail: $email\nMessage:\n$message";
+    // Validate form data
+    if (empty($name)) {
+        $errors[] = "Name is required.";
+    }
 
-  // Set the email headers
-  $headers = "From: $to\r\n";
-  $headers .= "Reply-To: $email\r\n";
-  $headers .= "X-Mailer: PHP/" . phpversion();
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
 
-  // Send the email
-  if (mail($to, $subject, $body, $headers, "-f $to")) {
-    echo 'Message sent successfully.';
-  } else {
-    echo 'An error occurred. Please try again later.';
-  }
+    if (empty($message)) {
+        $errors[] = "Message is required.";
+    }
+
+    // If no errors, send the email
+    if (empty($errors)) {
+      include "./inc/mail.txt"; // Replace with your email address
+        $subject = "New contact from $name";
+        $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+        $headers = [
+            "From" => $to,
+            "Reply-To" => $email,
+            "Content-Type" => "text/plain; charset=UTF-8"
+        ];
+
+        if (mail($to, $subject, $body, $headers, "-f $to")) {
+            $successMessage = "Your message has been sent successfully.";
+        } else {
+            $errors[] = "There was a problem sending your message. Please try again later.";
+        }
+    }
 }
+?>

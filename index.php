@@ -98,51 +98,60 @@
         </div>
       </section>
 
-      <!-- Contact Section Starts-->
-
-      <section class="accordion-item">
+       <!-- Contact Section Starts -->
+    <section class="accordion-item">
         <h2 class="accordion-header" id="headingFour">
-          <button class="accordion-button bg-light text-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            <h3 class="text-center py-5 titel bg-light text-secondary w-100">please contact me for more information
-              <br>
-            </h3>
-          </button>
+            <button class="accordion-button bg-light text-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <h3 class="text-center py-5 titel bg-light text-secondary w-100">please contact me for more information<br></h3>
+            </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse text-secondary collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
-          <div class="accordion-body text-secondary">
-            <!-- Wrapper container -->
-            <div class="container py-4">
+            <div class="accordion-body text-secondary">
+                <!-- Wrapper container -->
+                <div class="container py-4">
+                    <!-- Bootstrap 5 starter form -->
+                    <form id="contactForm" method="POST" action="">
+                        <?php if (!empty($errors)): ?>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <?php foreach ($errors as $error): ?>
+                                        <li><?php echo htmlspecialchars($error); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php elseif (!empty($successMessage)): ?>
+                            <div class="alert alert-success">
+                                <?php echo htmlspecialchars($successMessage); ?>
+                            </div>
+                        <?php endif; ?>
 
-              <!-- Bootstrap 5 starter form -->
-              <form id="contactForm" method="POST" action="">
+                        <!-- Name input -->
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control" id="name" name="name" type="text" placeholder="Name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" />
+                        </div>
 
-                <!-- Name input -->
-                <div class="mb-3">
-                  <label class="form-label" for="name">Name</label>
-                  <input class="form-control" id="name" name="name" type="text" placeholder="Name" />
+                        <!-- Email address input -->
+                        <div class="mb-3">
+                            <label class="form-label" for="emailAddress">Email Address</label>
+                            <input class="form-control" id="emailAddress" name="email" type="email" placeholder="Email Address" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
+                        </div>
+
+                        <!-- Message input -->
+                        <div class="mb-3">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" placeholder="Message" style="height: 10rem;"><?php echo isset($message) ? htmlspecialchars($message) : ''; ?></textarea>
+                        </div>
+
+                        <!-- Form submit button -->
+                        <div class="d-grid">
+                            <button class="btn btn-outline-dark text-secondary btn-lg" type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
-
-                <!-- Email address input -->
-                <div class="mb-3">
-                  <label class="form-label" for="emailAddress">Email Address</label>
-                  <input class="form-control" id="emailAddress" name="email" type="email" placeholder="Email Address" />
-                </div>
-
-                <!-- Message input -->
-                <div class="mb-3">
-                  <label class="form-label" for="message">Message</label>
-                  <textarea class="form-control" id="message" name="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
-                </div>
-
-                <!-- Form submit button -->
-                <div class="d-grid">
-                  <button class="btn btn-outline-dark text-secondary btn-lg" type="submit">Submit</button>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
     </div>
   </main>
 
