@@ -1,33 +1,52 @@
 <?php
+session_start();
+
+// Fehlerberichterstattung aktivieren
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// CSRF-Token-Generierung
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+$errors = [];
+$successMessage = '';
+$formStatus = ''; // Hinzugefügte Variable zum Speichern des Formularstatus
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect and sanitize form data
+    // Überprüfung des CSRF-Tokens
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die('Ungültiges CSRF-Token');
+    }
+
+    // Formular-Daten sammeln und bereinigen
     $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
     $message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING));
     $copyToSelf = isset($_POST['copyToSelf']) ? true : false;
 
-    $errors = [];
-
-    // Validate form data
+    // Formular-Daten validieren
     if (empty($name)) {
-        $errors[] = "Name is required.";
+        $errors[] = "Name ist erforderlich.";
     }
 
     if (empty($email)) {
-        $errors[] = "Email is required.";
+        $errors[] = "Email ist erforderlich.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Invalid email format.";
+        $errors[] = "Ungültiges Email-Format.";
     }
 
     if (empty($message)) {
-        $errors[] = "Message is required.";
+        $errors[] = "Nachricht ist erforderlich.";
     }
 
-    // If no errors, send the email
+    // Wenn keine Fehler vorliegen, E-Mail senden
     if (empty($errors)) {
-        include "./inc/mail.txt";
-        $subject = "New contact from $name";
-        $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+        $to = 'your-email@example.com'; // Ändern Sie dies auf Ihre E-Mail-Adresse
+        $subject = "Neue Kontaktanfrage von $name";
+        $body = "Name: $name\nEmail: $email\n\nNachricht:\n$message";
         $headers = [
             "From" => $to,
             "Reply-To" => $email,
@@ -37,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mailSent = mail($to, $subject, $body, $headers);
 
         if ($mailSent && $copyToSelf) {
-            $copySubject = "Copy of your message to Thomas Netusil";
+            $copySubject = "Kopie Ihrer Nachricht an Thomas Netusil";
             $copyHeaders = [
                 "From" => "no-reply@ariadne.at",
                 "Reply-To" => $to,
@@ -47,10 +66,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($mailSent) {
-            $successMessage = "Your message has been sent successfully.";
+            $successMessage = "Ihre Nachricht wurde erfolgreich gesendet.";
+            $formStatus = 'success'; // Erfolgsstatus setzen
+            // Formularfelder zurücksetzen
+            $name = '';
+            $email = '';
+            $message = '';
+            $copyToSelf = false;
         } else {
-            $errors[] = "There was a problem sending your message. Please try again later.";
+            $errors[] = "Es gab ein Problem beim Senden Ihrer Nachricht. Bitte versuchen Sie es später erneut.";
+            $formStatus = 'error'; // Fehlerstatus setzen
         }
+    } else {
+        $formStatus = 'error'; // Fehlerstatus setzen, wenn Validierung fehlschlägt
     }
 }
 ?>

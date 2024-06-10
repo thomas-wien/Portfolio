@@ -1,21 +1,35 @@
 // Define external link
-// const extLink = "https://localhost/codereview";
+// const extLink: string = "https://localhost/codereview";
 const extLink: string = "http://thomas.ariadne.at";
 
-// Define an interface for project properties
+/**
+ * This interface represents the properties of a project.
+ */
 export interface IProject {
+  /** The name of the project. */
   name: string;
+
+  /** The technologies used in the project. */
   technics: string;
+
+  /** A brief description of the project. */
   description_short: string;
+
+  /** A detailed description of the project. */
   description_detail: string;
+
+  /** The URL or file path of the project's image. */
   image: string;
+
+  /** The URL or file path where the project can be accessed or details can be found. */
   link: string;
 }
 
-// Define a class representing a single project
+/**
+ * This class represents a single project and its properties.
+ * It implements the IProject interface.
+ */
 export class Project implements IProject {
-  public image: string;
-  public link: string;
 
   /**
    * Constructs a new Project instance with the given parameters.
@@ -32,32 +46,47 @@ export class Project implements IProject {
     public technics: string,
     public description_short: string,
     public description_detail: string,
-    image: string,
-    link: string
+    public image: string,
+    public link: string
   ) {
     this.image = Project.constructImageUrl(image);
     this.link = Project.constructLinkUrl(link);
   }
 
-  // Static method to construct the image URL
+  /**
+   * Constructs the image URL for a project.
+   * @param {string} image - The base path or filename of the project's image.
+   * @returns {string} The full URL of the image.
+   */
   static constructImageUrl(image: string): string {
     return `./images/${image}`;
   }
 
-  // Static method to construct the link URL
+  /**
+   * Constructs the link URL for a project.
+   * @param {string} link - The base path or filename of the project's link.
+   * @returns {string} The full URL of the link.
+   */
   static constructLinkUrl(link: string): string {
     return `${extLink}/${link}`;
   }
 
-  // Define an array to hold the projects
+  /** An array to store all projects. */
   static allProjects: Project[] = [];
 
-  // Automatically push the projects to the array 
+  /**
+   * Adds a new project to the array of all projects.
+   * @param {Project} project - The project instance to be added.
+   */
   static addProject(project: Project): void {
     Project.allProjects.push(project);
   }
 
-  // Create the project card
+  /**
+   * Creates HTML markup for a project card.
+   * @param {Project} project - The project instance.
+   * @returns {string} HTML markup for the project card.
+   */
   static createProjectCard(project: Project): string {
     return `
       <div class="col-lg-4">
@@ -76,7 +105,11 @@ export class Project implements IProject {
       </div>`;
   }
 
-  // Create the project button
+  /**
+   * Creates HTML markup for a project button.
+   * @param {Project} project - The project instance.
+   * @returns {string} HTML markup for the project button.
+   */
   static createProjectButton(project: Project): string {
     return `
       <a class="btn btn-outline-dark text-secondary btn-floating m-1 btnShadow" href="${project.link}" role="button" target="_blank" rel="noopener noreferrer">
@@ -84,7 +117,10 @@ export class Project implements IProject {
   }
 }
 
-// Fetch projects from JSON file
+/**
+ * Fetches project data from a JSON file and displays it on the webpage.
+ * If an error occurs during fetching, an alert is displayed.
+ */
 export async function fetchProjects(): Promise<void> {
   try {
     const response = await fetch('./js/projects.json');
@@ -121,7 +157,11 @@ export async function fetchProjects(): Promise<void> {
   }
 }
 
-// Validate project data
+/**
+ * Checks if the provided data object is a valid project.
+ * @param {any} data - The data object to be validated.
+ * @returns {boolean} True if the data object is a valid project, otherwise false.
+ */
 function isValidProject(data: any): data is IProject {
   return typeof data.name === 'string' &&
     typeof data.technics === 'string' &&
@@ -131,7 +171,10 @@ function isValidProject(data: any): data is IProject {
     typeof data.link === 'string';
 }
 
-// Generate the web content
+/**
+ * Displays the fetched projects on the webpage.
+ * If the necessary elements are not found, an error is logged.
+ */
 export function displayProjects(): void {
   const resultcards = document.getElementById("ProjectCards") as HTMLElement | null;
   const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement | null;
@@ -148,7 +191,7 @@ export function displayProjects(): void {
   resultbuttons.innerHTML = buttonsHtml;
 }
 
-// Fetch and display projects when the page loads
+/** Fetch and display projects when the page loads */
 window.onload = function (): void {
   fetchProjects();
 };

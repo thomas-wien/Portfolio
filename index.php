@@ -44,7 +44,7 @@
           <div class="accordion-body">
             <div id="ProjectCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5 pb-5">
  
-              <!-- Cards are created in project.ts -->
+              <!-- Cards are created in project.ts data is in projects.json -->
             
             </div>
             <iframe src="../BE18-CR5-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
@@ -92,7 +92,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
           <div class="accordion-body text-success bg-dark ITtext">
-            <!-- the content is created in skills.ts using ID SkillsProgressCircles-->
+            <!-- the content is created in skills.ts using ID SkillsProgressCircles data is in skills.json -->
             <div id="SkillsProgressCircles" class="row row-cols-1 row-cols-md-2 g-2"></div>
           </div>
         </div>
@@ -100,7 +100,7 @@
 
       <!-- Contact Section Starts -->
       <section class="accordion-item">
-        <h2 class="accordion-header" id="headingFour">
+      <h2 class="accordion-header" id="headingFour">
             <button class="accordion-button bg-light text-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                 <h3 class="text-center py-5 titel bg-light text-secondary w-100">please contact me for more information<br></h3>
                 <?php if (!empty($errors)): ?>
@@ -124,7 +124,9 @@
                 <div class="container py-4">
                     <!-- Bootstrap 5 starter form -->
                     <form id="contactForm" method="POST" action="">
-                        
+                      <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                      <input type="hidden" id="formStatus" value="<?php echo htmlspecialchars($formStatus); ?>">
+
                         <!-- Name input -->
                         <div class="mb-3">
                             <label class="form-label" for="name">Name</label>
@@ -157,15 +159,10 @@
                 </div>
             </div>
         </div>
-      </section>
+    </section>
+
     </div>
   </main>
-
-  <footer>
-    <h6 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / TypeScript / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
-    </h6>
-  </footer>
-
 </body>
 
 </html>

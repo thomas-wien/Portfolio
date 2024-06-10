@@ -36,7 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 // Define the place in the HTML document where the skills will be shown
 var resultskills = document.getElementById("SkillsProgressCircles");
-// Define the Skill class
+/**
+ * Represents a skill with its properties and functionalities.
+ */
 var Skill = /** @class */ (function () {
     /**
      * Creates a new instance of the Skill class.
@@ -52,28 +54,46 @@ var Skill = /** @class */ (function () {
         this.hardOrSoft = hardOrSoft;
         this.skillType = skillType;
     }
-    // Automatically push the skills to the array 
+    /**
+   * Adds a new skill to the array of all skills.
+   * @param {Skill} skill - The skill instance to be added.
+   */
     Skill.addSkill = function (skill) {
         Skill.allSkills.push(skill);
     };
-    // Filter the skills by type (frontend, backend, soft skills)
+    /**
+     * Retrieves skills filtered by their type (frontend, backend, soft skills).
+     * @param {SkillType} type - The type of skills to retrieve.
+     * @returns {Skill[]} An array of skills filtered by the specified type.
+     */
     Skill.getSkillsByType = function (type) {
         return Skill.allSkills.filter(function (skill) { return skill.skillType === type; });
     };
-    // Create the Skill Group Head depending on the SkillType 
+    /**
+     * Create the Skill Group Head depending on the SkillType
+     * @param {SkillType} skillType - The type of skill for the group head.
+     * @returns {string} HTML markup for the skill group head.
+     */
     Skill.createSkillGroupHead = function (skillType) {
         return "<h3 class=\"bg-dark text-success w-100 text-center\"><strong>".concat(skillType, "</strong></h3>");
     };
-    // Create the skill progress circle
+    /**
+     * Creates HTML markup for a skill progress circle.
+     * @param {Skill} skill - The skill instance.
+     * @returns {string} HTML markup for the skill progress circle.
+     */
     Skill.createSkillCircle = function (skill) {
         return "\n      <div class=\"progressbar mx-auto\">\n        <svg class=\"progressbar__svg\">\n          <circle cx=\"80\" cy=\"80\" r=\"70\" class=\"progressbar__svg-circle circle-".concat(skill.cssname, " shadow-").concat(skill.cssname, "\"></circle>\n        </svg>\n        <span class=\"progressbar__text shadow-").concat(skill.cssname, "\">").concat(skill.name, "</span>\n      </div>\n    ");
     };
-    // Define an array to hold the skills
+    /** An array to hold all skills. */
     Skill.allSkills = [];
     return Skill;
 }());
 export { Skill };
-// Fetch skills from JSON file
+/**
+ * Fetches skills data from a JSON file and displays it on the webpage.
+ * If an error occurs during fetching, an alert is displayed.
+ */
 export function fetchSkills() {
     return __awaiter(this, void 0, void 0, function () {
         var response, skillsData, error_1;
@@ -115,7 +135,11 @@ export function fetchSkills() {
         });
     });
 }
-// Validate skill data
+/**
+ * Checks if the provided data object is a valid skill.
+ * @param {any} data - The data object to be validated.
+ * @returns {boolean} True if the data object is a valid skill, otherwise false.
+ */
 function isValidSkill(data) {
     return typeof data.name === 'string' &&
         typeof data.cssname === 'string' &&
@@ -124,7 +148,10 @@ function isValidSkill(data) {
             data.skillType === "BackEnd WebDev Skill" ||
             data.skillType === "Softskill");
 }
-// Generate the web content
+/**
+ * Displays the fetched skills on the webpage.
+ * If the necessary element is not found, an error is logged.
+ */
 export function displaySkills() {
     if (!resultskills) {
         console.error("The element to display skills is not found.");
@@ -141,7 +168,7 @@ export function displaySkills() {
     });
     resultskills.innerHTML = skillHtml.join('');
 }
-// Fetch and display skills when the page loads
+/** Fetch and display skills when the page loads */
 window.onload = function () {
     fetchSkills();
 };

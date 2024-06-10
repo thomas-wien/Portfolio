@@ -4,15 +4,26 @@ const resultskills = document.getElementById("SkillsProgressCircles") as HTMLEle
 // Define a type for skill categories
 type SkillType = "FrontEnd WebDev Skill" | "BackEnd WebDev Skill" | "Softskill";
 
-// Define the skill interface
+/**
+ * Represents the properties of a skill.
+ */
 export interface ISkill {
+  /** The name of the skill. */
   name: string;
+
+  /** The CSS name of the skill. */
   cssname: string;
+
+  /** Indicates whether the skill is a hard skill (true) or a soft skill (false). */
   hardOrSoft: boolean; // Hardskill = true
+
+  /** The type of the skill. */
   skillType: SkillType;
 }
 
-// Define the Skill class
+/**
+ * Represents a skill with its properties and functionalities.
+ */
 export class Skill implements ISkill {
   /**
    * Creates a new instance of the Skill class.
@@ -29,25 +40,40 @@ export class Skill implements ISkill {
     public skillType: SkillType
   ) { }
 
-  // Define an array to hold the skills
+  /** An array to hold all skills. */
   static allSkills: Skill[] = [];
 
-  // Automatically push the skills to the array 
+  /**
+ * Adds a new skill to the array of all skills.
+ * @param {Skill} skill - The skill instance to be added.
+ */
   static addSkill(skill: Skill): void {
     Skill.allSkills.push(skill);
   }
 
-  // Filter the skills by type (frontend, backend, soft skills)
+  /**
+   * Retrieves skills filtered by their type (frontend, backend, soft skills).
+   * @param {SkillType} type - The type of skills to retrieve.
+   * @returns {Skill[]} An array of skills filtered by the specified type.
+   */
   static getSkillsByType(type: SkillType): Skill[] {
     return Skill.allSkills.filter(skill => skill.skillType === type);
   }
 
-  // Create the Skill Group Head depending on the SkillType 
+  /**
+   * Create the Skill Group Head depending on the SkillType 
+   * @param {SkillType} skillType - The type of skill for the group head.
+   * @returns {string} HTML markup for the skill group head.
+   */
   static createSkillGroupHead(skillType: SkillType): string {
     return `<h3 class="bg-dark text-success w-100 text-center"><strong>${skillType}</strong></h3>`;
   }
 
-  // Create the skill progress circle
+  /**
+   * Creates HTML markup for a skill progress circle.
+   * @param {Skill} skill - The skill instance.
+   * @returns {string} HTML markup for the skill progress circle.
+   */
   static createSkillCircle(skill: Skill): string {
     return `
       <div class="progressbar mx-auto">
@@ -60,7 +86,10 @@ export class Skill implements ISkill {
   }
 }
 
-// Fetch skills from JSON file
+/**
+ * Fetches skills data from a JSON file and displays it on the webpage.
+ * If an error occurs during fetching, an alert is displayed.
+ */
 export async function fetchSkills(): Promise<void> {
   try {
     const response = await fetch('./js/skills.json');
@@ -89,7 +118,11 @@ export async function fetchSkills(): Promise<void> {
   }
 }
 
-// Validate skill data
+/**
+ * Checks if the provided data object is a valid skill.
+ * @param {any} data - The data object to be validated.
+ * @returns {boolean} True if the data object is a valid skill, otherwise false.
+ */
 function isValidSkill(data: any): data is ISkill {
   return typeof data.name === 'string' &&
     typeof data.cssname === 'string' &&
@@ -99,7 +132,10 @@ function isValidSkill(data: any): data is ISkill {
       data.skillType === "Softskill");
 }
 
-// Generate the web content
+/**
+ * Displays the fetched skills on the webpage.
+ * If the necessary element is not found, an error is logged.
+ */
 export function displaySkills(): void {
   if (!resultskills) {
     console.error("The element to display skills is not found.");
@@ -121,7 +157,7 @@ export function displaySkills(): void {
   resultskills.innerHTML = skillHtml.join('');
 }
 
-// Fetch and display skills when the page loads
+/** Fetch and display skills when the page loads */
 window.onload = function (): void {
   fetchSkills();
 };
