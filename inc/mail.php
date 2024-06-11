@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Wenn keine Fehler vorliegen, E-Mail senden
     if (empty($errors)) {
-        $to = 'your-email@example.com'; // Ändern Sie dies auf Ihre E-Mail-Adresse
+        include "./inc/mail.txt";
         $subject = "Neue Kontaktanfrage von $name";
         $body = "Name: $name\nEmail: $email\n\nNachricht:\n$message";
         $headers = [
