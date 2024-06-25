@@ -1,6 +1,7 @@
+<?php require_once 'inc/variablen.php' ?>
 <?php require_once 'inc/mail.php' ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="<?=$sprache?> data-bs-theme="auto">
 
 <head>
   <meta charset="UTF-8">
@@ -11,19 +12,19 @@
   <!-- end inculding Bootstrap -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <meta name="author" content="Thomas Netusil">
-  <meta name="description" content="The Projects and Vita of Thomas Netusil">
+  <meta name="description" content="<?= META_DESCRIPTION ?>">
   <script src="js/darkLight.js" defer></script> <!-- light/Darkmode switch -->
   <script src="dist/bundle.js" defer></script> <!-- Necessary for the Project Cards and Skills -->
   <link href="favicon.ico" rel="icon">
-  <title>Portfolio Thomas Netusil</title>
+  <title><?= META_TITLE ?></title>
 </head>
 
 <body class="container">
   <?php include "inc/menue.php" ?>
 
   <header>
-    <h2 class="text-center titel mt-5 pt-3">thomas netusil</h2>
-    <p class="text-center titel mb-4">fullstack web developer</p>
+    <h2 class="text-center titel mt-5 pt-3"><?= TN ?></h2>
+    <p class="text-center titel mb-4"><?= FULLSTACK ?></p>
   </header>
 
   <main>
@@ -35,7 +36,7 @@
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button bg-light text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
             <h3 class="text-center py-5 titel bg-light text-secondary">
-              my codereview projects for the fullstack web development course at codefactory, vienna
+              <?= PROJECTS ?>
             </h3>
           </button>
         </h2>
@@ -48,8 +49,8 @@
             
             </div>
             <iframe src="../BE18-CR5-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
-            <h3 class="text-center pt-5 titel">click a button to open the page external</h3>
-            <p class="titel">in the footer of each page there is a link to the github sources of the project</p>
+            <h3 class="text-center pt-5 titel"><?= OPEN_EXTERNAL ?></h3>
+            <p class="titel"><?= GITHUB_FOOTER_EXTERNAL ?></p>
             <h3 id="ProjectButtons" class="text-center py-5 titel">
 
               <!-- Buttons are created in project.ts -->
@@ -64,7 +65,7 @@
       <section class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button bg-secondary text-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <h3 class="text-center py-5 titel bg-secondary text-light w-100">my certifications and certificates of service (selection)
+            <h3 class="text-center py-5 titel bg-secondary text-light w-100"><?= CERTIFICATES ?>
               <br>
             </h3>
           </button>
@@ -85,8 +86,7 @@
       <section class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
           <button class="accordion-button bg-dark text-success collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            <h3 class="text-center py-5 titel bg-dark text-success w-100">my skills (social and
-              professional)
+            <h3 class="text-center py-5 titel bg-dark text-success w-100"><?= SKILLS ?>
             </h3>
           </button>
         </h2>
@@ -102,7 +102,7 @@
       <section class="accordion-item">
       <h2 class="accordion-header" id="headingFour">
             <button class="accordion-button bg-light text-secondary collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <h3 class="text-center py-5 titel bg-light text-secondary w-100">please contact me for more information<br></h3>
+                <h3 class="text-center py-5 titel bg-light text-secondary w-100"><?= CONTACT ?> <br></h3>
                 <?php if (!empty($errors)): ?>
                             <div class="alert alert-danger">
                                 <ul>
@@ -129,40 +129,41 @@
 
                         <!-- Name input -->
                         <div class="mb-3">
-                            <label class="form-label" for="name">Name</label>
-                            <input class="form-control" id="name" name="name" type="text" placeholder="Name" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" />
+                            <label class="form-label" for="name"><?= NAME ?></label>
+                            <input class="form-control" id="name" name="name" type="text" placeholder="<?= NAME ?>" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>" />
                         </div>
 
                         <!-- Email address input -->
                         <div class="mb-3">
-                            <label class="form-label" for="emailAddress">Email Address</label>
-                            <input class="form-control" id="emailAddress" name="email" type="email" placeholder="Email Address" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
+                            <label class="form-label" for="emailAddress"><?= EMAIL ?></label>
+                            <input class="form-control" id="emailAddress" name="email" type="email" placeholder="<?= EMAIL ?>" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
                         </div>
 
                         <!-- Message input -->
                         <div class="mb-3">
-                            <label class="form-label" for="message">Message</label>
-                            <textarea class="form-control" id="message" name="message" placeholder="Message" style="height: 10rem;"><?php echo isset($message) ? htmlspecialchars($message) : ''; ?></textarea>
+                            <label class="form-label" for="message"><?= MESSAGE ?></label>
+                            <textarea class="form-control" id="message" name="message" placeholder="<?= MESSAGE ?>" style="height: 10rem;"><?php echo isset($message) ? htmlspecialchars($message) : ''; ?></textarea>
                         </div>
 
                         <!-- Copy to self checkbox -->
                         <div class="mb-3 form-check">
                             <input class="form-check-input" type="checkbox" id="copyToSelf" name="copyToSelf" <?php echo isset($copyToSelf) && $copyToSelf ? 'checked' : ''; ?>>
-                            <label class="form-check-label" for="copyToSelf">Send a copy to myself</label>
+                            <label class="form-check-label" for="copyToSelf"><?= SELF_COPY ?></label>
                         </div>
                         
                         <!-- Form submit button -->
                         <div class="d-grid">
-                            <button class="btn btn-outline-dark text-secondary btn-lg" type="submit">Submit</button>
+                            <button class="btn btn-outline-dark text-secondary btn-lg" type="submit"><?= SUBMIT ?></button>
                         </div>
                     </form>
                 </div>
             </div>
             </div>
+    </section>
   </main>
 
   <footer>
-    <h6 class="text-center pt-5 titel">this page is created using HTML5 / PHP / SCSS / Bootstrap / TypeScript / JSON / <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
+    <h6 class="text-center pt-5 titel"><?=FOOTER?> <a href="https://github.com/thomas-wien/Portfolio.git" target="_blank" rel="noopener noreferrer">see github</a>
     </h6>
   </footer>
 

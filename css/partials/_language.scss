@@ -1,0 +1,36 @@
+#deutsch,
+#english,
+#spanisch {
+  position: absolute;
+  height: 20px;
+  z-index: 3;
+  top: 30px;
+  font-size: xx-small;
+  color: #ccc;
+
+
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+}
+
+#deutsch {
+  width: 15px;
+  left: 711px;
+}
+
+#english {
+  width: 18px;
+  left: 730px;
+}
+
+#spanisch {
+  width: 14px;
+  left: 755px;
+}

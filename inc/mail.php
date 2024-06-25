@@ -1,25 +1,9 @@
 <?php
-session_start();
-
-// Fehlerberichterstattung aktivieren
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// CSRF-Token-Generierung
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
 $errors = [];
 $successMessage = '';
 $formStatus = ''; // Hinzugefügte Variable zum Speichern des Formularstatus
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Überprüfung des CSRF-Tokens
-    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        die('Ungültiges CSRF-Token');
-    }
 
     // Formular-Daten sammeln und bereinigen
     $name = trim(filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING));
