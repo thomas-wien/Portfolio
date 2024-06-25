@@ -46,7 +46,7 @@ if ($sprache == "en") {
 	setlocale(LC_ALL,"de_AT.UTF8");
 	setlocale(LC_TIME, 'German_Austria');
   define("TN","Thomas Netusil");
-  define("LENGUAGE_MENU","<img src='images/assets/deutsch.svg.png' style='height:10px;' alt='dn' /> Deutsch");
+  define("LENGUAGE_MENU","<img src='images/assets/deutsch.svg.png' style='height:10px;' alt='de' /> Deutsch");
   define("META_DESCRIPTION","Die Projekte und Vita von Thomas Netusil");
   define("META_TITLE","Portfolio Thomas Netusil");
 	define("FULLSTACK","Fullstack Web Developer");

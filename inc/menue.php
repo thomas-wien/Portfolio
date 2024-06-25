@@ -27,14 +27,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown" style="display:block">
           <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?php echo LENGUAGE_MENU; ?>
           </a>
           <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-            <li><a class="dropdown-item" href="?language=de"><img src="images/assets/deutsch.svg.png" style="height:10px;" alt="de" /> Deutsch</a></li>
-            <li><a class="dropdown-item" href="?language=en"><img src="images/assets/english.svg.png" style="height:10px;" alt="en" /> English</a></li>
-            <li><a class="dropdown-item" href="?language=es"><img src="images/assets/spanisch.svg.png" style="height:10px;" alt="en" /> español</a></li>
+            <li><a class="dropdown-item" href="?language=de"><img src="images/assets/deutsch.svg.png" style="height:10px;" alt="de" />&nbsp;Deutsch</a></li>
+            <li><a class="dropdown-item" href="?language=en"><img src="images/assets/english.svg.png" style="height:10px;" alt="en" />&nbsp;English</a></li>
+            <li><a class="dropdown-item" href="?language=es"><img src="images/assets/spanisch.svg.png" style="height:10px;" alt="es" />&nbsp;español</a></li>
             <!-- Add more languages as needed -->
           </ul>
         </li>
