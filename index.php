@@ -1,7 +1,7 @@
 <?php require_once 'inc/variablen.php' ?>
 <?php require_once 'inc/mail.php' ?>
 <!DOCTYPE html>
-<html lang="<?=$sprache?> data-bs-theme="auto">
+<html lang="<?=$sprache?>" data-bs-theme="auto">
 
 <head>
   <meta charset="UTF-8">

@@ -35,23 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 // Define external link
-// const extLink: string = "https://localhost/codereview";
 var extLink = "http://thomas.ariadne.at";
 /**
  * This class represents a single project and its properties.
  * It implements the IProject interface.
  */
 var Project = /** @class */ (function () {
-    /**
-     * Constructs a new Project instance with the given parameters.
-     *
-     * @param {string} name - The name of the project.
-     * @param {string} technics - The technologies used in the project.
-     * @param {string} description_short - A short description of the project.
-     * @param {string} description_detail - A detailed description of the project.
-     * @param {string} image - The URL or file path of the project image.
-     * @param {string} link - The URL or file path of the project link.
-     */
     function Project(name, technics, description_short, description_detail, image, link) {
         this.name = name;
         this.technics = technics;
@@ -62,57 +51,40 @@ var Project = /** @class */ (function () {
         this.image = Project.constructImageUrl(image);
         this.link = Project.constructLinkUrl(link);
     }
-    /**
-     * Constructs the image URL for a project.
-     * @param {string} image - The base path or filename of the project's image.
-     * @returns {string} The full URL of the image.
-     */
     Project.constructImageUrl = function (image) {
         return "./images/".concat(image);
     };
-    /**
-     * Constructs the link URL for a project.
-     * @param {string} link - The base path or filename of the project's link.
-     * @returns {string} The full URL of the link.
-     */
     Project.constructLinkUrl = function (link) {
         return "".concat(extLink, "/").concat(link);
     };
-    /**
-     * Adds a new project to the array of all projects.
-     * @param {Project} project - The project instance to be added.
-     */
     Project.addProject = function (project) {
         Project.allProjects.push(project);
     };
-    /**
-     * Creates HTML markup for a project card.
-     * @param {Project} project - The project instance.
-     * @returns {string} HTML markup for the project card.
-     */
     Project.createProjectCard = function (project) {
         return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"").concat(project.name, " image\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
     };
-    /**
-     * Creates HTML markup for a project button.
-     * @param {Project} project - The project instance.
-     * @returns {string} HTML markup for the project button.
-     */
     Project.createProjectButton = function (project) {
         return "\n      <a class=\"btn btn-outline-dark text-secondary btn-floating m-1 btnShadow\" href=\"".concat(project.link, "\" role=\"button\" target=\"_blank\" rel=\"noopener noreferrer\">\n      ").concat(project.name, "</a>");
     };
-    /** An array to store all projects. */
     Project.allProjects = [];
     return Project;
 }());
 export { Project };
+/**
+ * Determines the current language setting from the HTML document.
+ * @returns {string} The language code (e.g., 'en', 'de', 'es').
+ */
+function getCurrentLanguage() {
+    var htmlLang = document.documentElement.lang;
+    return htmlLang || 'en';
+}
 /**
  * Fetches project data from a JSON file and displays it on the webpage.
  * If an error occurs during fetching, an alert is displayed.
  */
 export function fetchProjects() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, projectsData, error_1;
+        var response, projectsData, lang, shortDescKey_1, detailDescKey_1, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -126,18 +98,15 @@ export function fetchProjects() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     projectsData = _a.sent();
-                    // Type check for JSON data
                     if (!Array.isArray(projectsData)) {
                         throw new Error('Projects data is not an array');
                     }
+                    lang = getCurrentLanguage();
+                    shortDescKey_1 = "description_short_".concat(lang);
+                    detailDescKey_1 = "description_detail_".concat(lang);
                     projectsData.forEach(function (projectData) {
-                        if (isValidProject(projectData)) {
-                            var project = new Project(projectData.name, projectData.technics, projectData.description_short, projectData.description_detail, projectData.image, projectData.link);
-                            Project.addProject(project);
-                        }
-                        else {
-                            console.warn('Invalid project data:', projectData);
-                        }
+                        var project = new Project(projectData.name, projectData.technics, projectData[shortDescKey_1] || projectData.description_short_en, projectData[detailDescKey_1] || projectData.description_detail_en, projectData.image, projectData.link);
+                        Project.addProject(project);
                     });
                     displayProjects();
                     return [3 /*break*/, 4];
@@ -150,19 +119,6 @@ export function fetchProjects() {
             }
         });
     });
-}
-/**
- * Checks if the provided data object is a valid project.
- * @param {any} data - The data object to be validated.
- * @returns {boolean} True if the data object is a valid project, otherwise false.
- */
-function isValidProject(data) {
-    return typeof data.name === 'string' &&
-        typeof data.technics === 'string' &&
-        typeof data.description_short === 'string' &&
-        typeof data.description_detail === 'string' &&
-        typeof data.image === 'string' &&
-        typeof data.link === 'string';
 }
 /**
  * Displays the fetched projects on the webpage.

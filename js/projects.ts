@@ -1,27 +1,19 @@
 // Define external link
-// const extLink: string = "https://localhost/codereview";
 const extLink: string = "http://thomas.ariadne.at";
 
 /**
  * This interface represents the properties of a project.
  */
 export interface IProject {
-  /** The name of the project. */
   name: string;
-
-  /** The technologies used in the project. */
   technics: string;
-
-  /** A brief description of the project. */
-  description_short: string;
-
-  /** A detailed description of the project. */
-  description_detail: string;
-
-  /** The URL or file path of the project's image. */
+  description_short_en: string;
+  description_short_de: string;
+  description_short_es: string;
+  description_detail_en: string;
+  description_detail_de: string;
+  description_detail_es: string;
   image: string;
-
-  /** The URL or file path where the project can be accessed or details can be found. */
   link: string;
 }
 
@@ -29,18 +21,7 @@ export interface IProject {
  * This class represents a single project and its properties.
  * It implements the IProject interface.
  */
-export class Project implements IProject {
-
-  /**
-   * Constructs a new Project instance with the given parameters.
-   *
-   * @param {string} name - The name of the project.
-   * @param {string} technics - The technologies used in the project.
-   * @param {string} description_short - A short description of the project.
-   * @param {string} description_detail - A detailed description of the project.
-   * @param {string} image - The URL or file path of the project image.
-   * @param {string} link - The URL or file path of the project link.
-   */
+export class Project {
   constructor(
     public name: string,
     public technics: string,
@@ -53,40 +34,20 @@ export class Project implements IProject {
     this.link = Project.constructLinkUrl(link);
   }
 
-  /**
-   * Constructs the image URL for a project.
-   * @param {string} image - The base path or filename of the project's image.
-   * @returns {string} The full URL of the image.
-   */
   static constructImageUrl(image: string): string {
     return `./images/${image}`;
   }
 
-  /**
-   * Constructs the link URL for a project.
-   * @param {string} link - The base path or filename of the project's link.
-   * @returns {string} The full URL of the link.
-   */
   static constructLinkUrl(link: string): string {
     return `${extLink}/${link}`;
   }
 
-  /** An array to store all projects. */
   static allProjects: Project[] = [];
 
-  /**
-   * Adds a new project to the array of all projects.
-   * @param {Project} project - The project instance to be added.
-   */
   static addProject(project: Project): void {
     Project.allProjects.push(project);
   }
 
-  /**
-   * Creates HTML markup for a project card.
-   * @param {Project} project - The project instance.
-   * @returns {string} HTML markup for the project card.
-   */
   static createProjectCard(project: Project): string {
     return `
       <div class="col-lg-4">
@@ -105,16 +66,20 @@ export class Project implements IProject {
       </div>`;
   }
 
-  /**
-   * Creates HTML markup for a project button.
-   * @param {Project} project - The project instance.
-   * @returns {string} HTML markup for the project button.
-   */
   static createProjectButton(project: Project): string {
     return `
       <a class="btn btn-outline-dark text-secondary btn-floating m-1 btnShadow" href="${project.link}" role="button" target="_blank" rel="noopener noreferrer">
       ${project.name}</a>`;
   }
+}
+
+/**
+ * Determines the current language setting from the HTML document.
+ * @returns {string} The language code (e.g., 'en', 'de', 'es').
+ */
+function getCurrentLanguage(): string {
+  const htmlLang = document.documentElement.lang;
+  return htmlLang || 'en';
 }
 
 /**
@@ -129,25 +94,24 @@ export async function fetchProjects(): Promise<void> {
     }
     const projectsData: IProject[] = await response.json();
 
-    // Type check for JSON data
     if (!Array.isArray(projectsData)) {
       throw new Error('Projects data is not an array');
     }
 
+    const lang = getCurrentLanguage();
+    const shortDescKey = `description_short_${lang}` as keyof IProject;
+    const detailDescKey = `description_detail_${lang}` as keyof IProject;
+
     projectsData.forEach(projectData => {
-      if (isValidProject(projectData)) {
-        const project = new Project(
-          projectData.name,
-          projectData.technics,
-          projectData.description_short,
-          projectData.description_detail,
-          projectData.image,
-          projectData.link
-        );
-        Project.addProject(project);
-      } else {
-        console.warn('Invalid project data:', projectData);
-      }
+      const project = new Project(
+        projectData.name,
+        projectData.technics,
+        projectData[shortDescKey] || projectData.description_short_en,
+        projectData[detailDescKey] || projectData.description_detail_en,
+        projectData.image,
+        projectData.link
+      );
+      Project.addProject(project);
     });
 
     displayProjects();
@@ -155,20 +119,6 @@ export async function fetchProjects(): Promise<void> {
     console.error('Error fetching projects data:', error);
     alert('An error occurred while fetching the projects data. Please try again later.');
   }
-}
-
-/**
- * Checks if the provided data object is a valid project.
- * @param {any} data - The data object to be validated.
- * @returns {boolean} True if the data object is a valid project, otherwise false.
- */
-function isValidProject(data: any): data is IProject {
-  return typeof data.name === 'string' &&
-    typeof data.technics === 'string' &&
-    typeof data.description_short === 'string' &&
-    typeof data.description_detail === 'string' &&
-    typeof data.image === 'string' &&
-    typeof data.link === 'string';
 }
 
 /**
