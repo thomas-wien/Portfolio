@@ -17,5 +17,6 @@ Die Navigation durch die Webseite erfolgt über die Abschnitte, die als Akkordeo
 ## Weitere Hinweise:
 
 - Die Webseite enthält auch einen Schalter zum Wechseln zwischen dem hellen und dunklen Modus.
+- Die Webseite ist mehrsprachig und wählt automatisch die Systemsprache, enthält aber auch eine Sprachauswahl über ein Menü
 - Modulare Struktur: Verwendung von TypeScript-Klassen und -Modulen für sauberen und wartbaren Code.
 - JSON-Daten: Projekte und Fähigkeiten werden aus JSON-Dateien geladen, was die Datenverwaltung erleichtert.
