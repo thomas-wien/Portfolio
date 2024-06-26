@@ -1,8 +1,9 @@
 // Define external link
 const extLink: string = "http://thomas.ariadne.at";
-// const extLink: string = "https://localhost/codereview";
 
-// Interface for project data
+/**
+ * This interface represents the properties of a project.
+ */
 export interface IProject {
   name: string;
   technics: string;
@@ -16,34 +17,10 @@ export interface IProject {
   link: string;
 }
 
-// Localization class
-class Localization {
-  private static loadedTexts: { [key: string]: string } = {};
-
-  static async loadTexts(lang: string): Promise<void> {
-    try {
-      const response = await fetch(`./js/texts_${lang}.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to load texts for language ${lang}`);
-      }
-      this.loadedTexts = await response.json();
-    } catch (error) {
-      console.error('Error loading texts:', error);
-      this.loadedTexts = {};
-    }
-  }
-
-  static getCurrentLanguage(): string {
-    const htmlLang = document.documentElement.lang;
-    return htmlLang || 'en';
-  }
-
-  static getText(key: keyof typeof Localization.loadedTexts): string {
-    return this.loadedTexts[key] || '';
-  }
-}
-
-// Project class
+/**
+ * This class represents a single project and its properties.
+ * It implements the IProject interface.
+ */
 export class Project {
   constructor(
     public name: string,
@@ -53,7 +30,6 @@ export class Project {
     public image: string,
     public link: string
   ) {
-    fetchProjects
     this.image = Project.constructImageUrl(image);
     this.link = Project.constructLinkUrl(link);
   }
@@ -73,11 +49,10 @@ export class Project {
   }
 
   static createProjectCard(project: Project): string {
-    const title = Localization.getText('cardTitle');
     return `
       <div class="col-lg-4">
         <div class="card">
-          <a href="${project.link}" target="content" rel="noopener noreferrer" title="${title}">
+          <a href="${project.link}" target="content" rel="noopener noreferrer" title="Click to open the page in the IFrame below">
             <div class="face front-face">
               <img src="${project.image}" alt="${project.name} image" class="profile">
               <div class="pt-3 text-uppercase name">${project.name}</div>
@@ -93,27 +68,37 @@ export class Project {
 
   static createProjectButton(project: Project): string {
     return `
-      <a class="btn btn-outline-secondary text-secondary btn-floating m-1 shadow" href="${project.link}" role="button" target="_blank" rel="noopener noreferrer">
+      <a class="btn btn-outline-dark text-secondary btn-floating m-1 btnShadow" href="${project.link}" role="button" target="_blank" rel="noopener noreferrer">
       ${project.name}</a>`;
   }
 }
 
-// Fetch and display projects
+/**
+ * Determines the current language setting from the HTML document.
+ * @returns {string} The language code (e.g., 'en', 'de', 'es').
+ */
+function getCurrentLanguage(): string {
+  const htmlLang = document.documentElement.lang;
+  return htmlLang || 'en';
+}
+
+/**
+ * Fetches project data from a JSON file and displays it on the webpage.
+ * If an error occurs during fetching, an alert is displayed.
+ */
 export async function fetchProjects(): Promise<void> {
   try {
     const response = await fetch('./js/projects.json');
     if (!response.ok) {
-      throw new Error(Localization.getText('fetchFailed'));
+      throw new Error('Failed to fetch projects data');
     }
     const projectsData: IProject[] = await response.json();
 
     if (!Array.isArray(projectsData)) {
-      throw new Error(Localization.getText('notArray'));
+      throw new Error('Projects data is not an array');
     }
 
-    const lang = Localization.getCurrentLanguage();
-    await Localization.loadTexts(lang);
-
+    const lang = getCurrentLanguage();
     const shortDescKey = `description_short_${lang}` as keyof IProject;
     const detailDescKey = `description_detail_${lang}` as keyof IProject;
 
@@ -132,17 +117,20 @@ export async function fetchProjects(): Promise<void> {
     displayProjects();
   } catch (error) {
     console.error('Error fetching projects data:', error);
-    alert(Localization.getText('fetchError'));
+    alert('An error occurred while fetching the projects data. Please try again later.');
   }
 }
 
-// Display projects
-function displayProjects(): void {
+/**
+ * Displays the fetched projects on the webpage.
+ * If the necessary elements are not found, an error is logged.
+ */
+export function displayProjects(): void {
   const resultcards = document.getElementById("ProjectCards") as HTMLElement | null;
   const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement | null;
 
   if (!resultcards || !resultbuttons) {
-    console.error(Localization.getText('displayError'));
+    console.error("The elements to display projects are not found.");
     return;
   }
 
@@ -153,7 +141,7 @@ function displayProjects(): void {
   resultbuttons.innerHTML = buttonsHtml;
 }
 
-// Fetch and display projects when the page loads
-window.onload = async function (): Promise<void> {
-  await fetchProjects();
+/** Fetch and display projects when the page loads */
+window.onload = function (): void {
+  fetchProjects();
 };

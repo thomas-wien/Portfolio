@@ -1,0 +1,7 @@
+{
+  "cardTitle": "Click to open the page in the area below",
+  "fetchError": "An error occurred while fetching the projects data. Please try again later.",
+  "fetchFailed": "Failed to fetch projects data",
+  "notArray": "Projects data is not an array",
+  "displayError": "The elements to display projects are not found."
+}

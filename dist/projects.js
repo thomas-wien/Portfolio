@@ -36,10 +36,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 // Define external link
 var extLink = "http://thomas.ariadne.at";
-/**
- * This class represents a single project and its properties.
- * It implements the IProject interface.
- */
+// Localization class
+var Localization = /** @class */ (function () {
+    function Localization() {
+    }
+    Localization.loadTexts = function (lang) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, _a, error_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, fetch("texts_".concat(lang, ".json"))];
+                    case 1:
+                        response = _b.sent();
+                        if (!response.ok) {
+                            throw new Error("Failed to load texts for language ".concat(lang));
+                        }
+                        _a = this;
+                        return [4 /*yield*/, response.json()];
+                    case 2:
+                        _a.loadedTexts = _b.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _b.sent();
+                        console.error('Error loading texts:', error_1);
+                        this.loadedTexts = {};
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Localization.getCurrentLanguage = function () {
+        var htmlLang = document.documentElement.lang;
+        return htmlLang || 'en';
+    };
+    Localization.getText = function (key) {
+        return this.loadedTexts[key] || '';
+    };
+    Localization.loadedTexts = {};
+    return Localization;
+}());
+// Project class
 var Project = /** @class */ (function () {
     function Project(name, technics, description_short, description_detail, image, link) {
         this.name = name;
@@ -48,6 +87,7 @@ var Project = /** @class */ (function () {
         this.description_detail = description_detail;
         this.image = image;
         this.link = link;
+        fetchProjects;
         this.image = Project.constructImageUrl(image);
         this.link = Project.constructLinkUrl(link);
     }
@@ -61,47 +101,40 @@ var Project = /** @class */ (function () {
         Project.allProjects.push(project);
     };
     Project.createProjectCard = function (project) {
-        return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"Click to open the page in the IFrame below\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"").concat(project.name, " image\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
+        var title = Localization.getText('cardTitle');
+        return "\n      <div class=\"col-lg-4\">\n        <div class=\"card\">\n          <a href=\"".concat(project.link, "\" target=\"content\" rel=\"noopener noreferrer\" title=\"").concat(title, "\">\n            <div class=\"face front-face\">\n              <img src=\"").concat(project.image, "\" alt=\"").concat(project.name, " image\" class=\"profile\">\n              <div class=\"pt-3 text-uppercase name\">").concat(project.name, "</div>\n              <div class=\"technics\">").concat(project.technics, "</div>\n            </div>\n            <div class=\"face back-face\">\n              <strong>").concat(project.description_short, "</strong><br>").concat(project.description_detail, "\n            </div>\n          </a>\n        </div>\n      </div>");
     };
     Project.createProjectButton = function (project) {
-        return "\n      <a class=\"btn btn-outline-dark text-secondary btn-floating m-1 btnShadow\" href=\"".concat(project.link, "\" role=\"button\" target=\"_blank\" rel=\"noopener noreferrer\">\n      ").concat(project.name, "</a>");
+        return "\n      <a class=\"btn btn-outline-secondary text-secondary btn-floating m-1 shadow\" href=\"".concat(project.link, "\" role=\"button\" target=\"_blank\" rel=\"noopener noreferrer\">\n      ").concat(project.name, "</a>");
     };
     Project.allProjects = [];
     return Project;
 }());
 export { Project };
-/**
- * Determines the current language setting from the HTML document.
- * @returns {string} The language code (e.g., 'en', 'de', 'es').
- */
-function getCurrentLanguage() {
-    var htmlLang = document.documentElement.lang;
-    return htmlLang || 'en';
-}
-/**
- * Fetches project data from a JSON file and displays it on the webpage.
- * If an error occurs during fetching, an alert is displayed.
- */
-export function fetchProjects() {
+// Fetch and display projects
+function fetchProjects() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, projectsData, lang, shortDescKey_1, detailDescKey_1, error_1;
+        var response, projectsData, lang, shortDescKey_1, detailDescKey_1, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 4, , 5]);
                     return [4 /*yield*/, fetch('./js/projects.json')];
                 case 1:
                     response = _a.sent();
                     if (!response.ok) {
-                        throw new Error('Failed to fetch projects data');
+                        throw new Error(Localization.getText('fetchFailed'));
                     }
                     return [4 /*yield*/, response.json()];
                 case 2:
                     projectsData = _a.sent();
                     if (!Array.isArray(projectsData)) {
-                        throw new Error('Projects data is not an array');
+                        throw new Error(Localization.getText('notArray'));
                     }
-                    lang = getCurrentLanguage();
+                    lang = Localization.getCurrentLanguage();
+                    return [4 /*yield*/, Localization.loadTexts(lang)];
+                case 3:
+                    _a.sent();
                     shortDescKey_1 = "description_short_".concat(lang);
                     detailDescKey_1 = "description_detail_".concat(lang);
                     projectsData.forEach(function (projectData) {
@@ -109,26 +142,23 @@ export function fetchProjects() {
                         Project.addProject(project);
                     });
                     displayProjects();
-                    return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _a.sent();
-                    console.error('Error fetching projects data:', error_1);
-                    alert('An error occurred while fetching the projects data. Please try again later.');
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_2 = _a.sent();
+                    console.error('Error fetching projects data:', error_2);
+                    alert(Localization.getText('fetchError'));
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
             }
         });
     });
 }
-/**
- * Displays the fetched projects on the webpage.
- * If the necessary elements are not found, an error is logged.
- */
-export function displayProjects() {
+// Display projects
+function displayProjects() {
     var resultcards = document.getElementById("ProjectCards");
     var resultbuttons = document.getElementById("ProjectButtons");
     if (!resultcards || !resultbuttons) {
-        console.error("The elements to display projects are not found.");
+        console.error(Localization.getText('displayError'));
         return;
     }
     var cardsHtml = Project.allProjects.map(function (project) { return Project.createProjectCard(project); }).join('');
@@ -136,7 +166,16 @@ export function displayProjects() {
     resultcards.innerHTML = cardsHtml;
     resultbuttons.innerHTML = buttonsHtml;
 }
-/** Fetch and display projects when the page loads */
+// Fetch and display projects when the page loads
 window.onload = function () {
-    fetchProjects();
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fetchProjects()];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    });
 };

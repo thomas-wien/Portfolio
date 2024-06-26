@@ -1,0 +1,121 @@
+ Volume in Laufwerk C: hat keine Bezeichnung.
+ Volumeseriennummer: 5E06-0F75
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio
+
+26.06.2024  10:57    <DIR>          .
+13.06.2024  08:54    <DIR>          ..
+04.06.2024  13:05                39 .gitignore
+26.05.2024  20:51    <DIR>          .vscode
+09.03.2024  13:08    <DIR>          css
+26.06.2024  10:57                 0 dateiname.txt
+10.06.2024  12:58    <DIR>          dist
+03.03.2007  12:23            15�558 favicon.ico
+25.06.2024  12:20    <DIR>          images
+25.06.2024  11:15    <DIR>          inc
+26.06.2024  10:41             9�518 index.php
+26.06.2024  10:47    <DIR>          js
+09.06.2024  14:56    <DIR>          node_modules
+09.06.2024  14:56            57�855 package-lock.json
+26.06.2024  10:42               568 package.json
+25.06.2024  15:04             1�587 README.md
+26.06.2024  10:26               432 tsconfig.json
+26.06.2024  10:43               615 webpack.common.js
+26.05.2024  21:00               379 webpack.config.js
+26.06.2024  10:43               410 webpack.dev.js
+26.06.2024  10:43               437 webpack.prod.js
+              12 Datei(en),         87�398 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\css
+
+09.03.2024  13:08    <DIR>          .
+26.06.2024  10:57    <DIR>          ..
+25.06.2024  12:23    <DIR>          partials
+26.06.2024  09:36            13�690 styles.css
+26.06.2024  09:36             5�724 styles.css.map
+26.06.2024  09:36               915 styles.scss
+               3 Datei(en),         20�329 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\css\partials
+
+25.06.2024  12:23    <DIR>          .
+09.03.2024  13:08    <DIR>          ..
+25.06.2024  19:17             3�755 _cards.scss
+09.03.2024  13:22             3�798 _dark_light_toggler.scss
+25.06.2024  12:23               412 _language.scss
+09.03.2023  12:11             1�658 _rotating_cards.scss
+08.03.2024  21:23             2�592 _skill.scss
+26.03.2023  21:16               420 _switch.scss
+               6 Datei(en),         12�635 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\dist
+
+10.06.2024  12:58    <DIR>          .
+26.06.2024  10:57    <DIR>          ..
+25.06.2024  19:50            23�624 bundle.js
+25.06.2024  19:55               157 index.js
+25.06.2024  19:55             1�331 mail.js
+25.06.2024  19:55             9�535 projects.js
+25.06.2024  19:55             8�381 skills.js
+               5 Datei(en),         43�028 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\images
+
+25.06.2024  12:20    <DIR>          .
+26.06.2024  10:57    <DIR>          ..
+01.04.2023  16:35            83�938 adoptAPet.png
+25.06.2024  12:20    <DIR>          assets
+02.04.2023  17:46           169�723 certification.png
+09.03.2023  14:30            90�735 frontEndProject.png
+13.03.2023  11:31           453�060 portfolio.png
+09.03.2023  14:30            75�923 ristoranteOnlineShop.png
+13.03.2023  11:45           190�409 skills.png
+26.03.2023  15:59            93�154 theLibrary.png
+12.03.2023  17:08           104�004 veaganFoodBlock.png
+09.03.2023  14:28            86�963 weeklyPlanner.png
+01.05.2023  14:46         1�741�981 Zertifikate_ThomasNetusil.pdf
+21.05.2024  14:13           603�775 Zeugnisse_ThomasNetusil.pdf
+              11 Datei(en),      3�693�665 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\images\assets
+
+25.06.2024  12:20    <DIR>          .
+25.06.2024  12:20    <DIR>          ..
+06.06.2007  11:08               422 deutsch.svg.png
+06.06.2007  11:10             1�855 english.svg.png
+06.06.2007  11:13               500 spanisch.svg.png
+               3 Datei(en),          2�777 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\inc
+
+25.06.2024  11:15    <DIR>          .
+26.06.2024  10:57    <DIR>          ..
+25.06.2024  13:11             4�313 dark_light_toggle.php
+25.06.2024  14:13             2�407 mail.php
+04.06.2024  21:07                41 mail.txt
+25.06.2024  17:48             6�092 menue.php
+25.06.2024  11:11             1�289 sprachen.php
+25.06.2024  19:52             3�818 variablen.php
+               6 Datei(en),         17�960 Bytes
+
+ Verzeichnis von C:\xampp\htdocs\CodeReview\Portfolio\js
+
+26.06.2024  10:47    <DIR>          .
+26.06.2024  10:57    <DIR>          ..
+25.06.2024  12:58             2�523 darkLight.js
+26.06.2024  10:47               260 index.js
+26.05.2024  18:07               167 index.ts
+26.06.2024  10:47             1�436 mail.js
+10.06.2024  13:01             1�340 mail.ts
+26.06.2024  10:47             5�531 projects.js
+25.06.2024  16:12             7�189 projects.json
+26.06.2024  10:24             4�975 projects.ts
+26.06.2024  10:47             5�894 skills.js
+24.05.2024  18:20             1�867 skills.json
+10.06.2024  12:57             5�392 skills.ts
+26.06.2024  09:45               396 texts_de.json
+26.06.2024  09:45               332 texts_en.json
+26.06.2024  09:45               332 texts_es.json
+              14 Datei(en),         37�634 Bytes
+
+ 

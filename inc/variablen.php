@@ -51,8 +51,8 @@ if ($sprache == "en") {
   define("META_TITLE","Portfolio Thomas Netusil");
 	define("FULLSTACK","Fullstack Web Developer");
   define("PROJECTS","Meine Codereview Projekte für den Fullstack Web Developer Kurs bei CodeFactory, Wien");
-  define("OPEN_EXTERNAL","Klicken Sie auf einen Button, um die Seite in einem neuen Fenster zu öffnen");
-  define("GITHUB_FOOTER_EXTERNAL","im Footer jeder Seite gibt es einen Link zum Github-Quellcode des Projekts");
+  define("OPEN_EXTERNAL","Klicken Sie auf eine Schaltfläche, um das Projekt in einem neuen Fenster zu öffnen");
+  define("GITHUB_FOOTER_EXTERNAL","in der Fußzeile jeder Seite gibt es einen Link zum Github-Quellcode des Projekts");
   define("CERTIFICATES","Zertifikate und Dienstzeugnisse (Auswahl)");
   define("SKILLS", "Meine Skills (Beruflich und Sozial)");
   define("CONTACT","Bitte kontaktieren Sie mich für weitere Informationen");

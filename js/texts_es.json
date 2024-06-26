@@ -1,0 +1,7 @@
+{
+  "cardTitle": "Haz clic aquí para abrir la página en el marco inferior",
+  "fetchError": "Se produjo un error al obtener los datos del proyecto. Por favor, inténtalo de nuevo más tarde.",
+  "fetchFailed": "No se pudieron obtener los datos del proyecto",
+  "notArray": "Los datos del proyecto no son un array",
+  "displayError": "Los elementos para mostrar los proyectos no se encontraron"
+}

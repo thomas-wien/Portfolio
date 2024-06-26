@@ -1,0 +1,7 @@
+{
+  "cardTitle": "Klicken Sie hier, um die Seite im unteren Bereich zu öffnen",
+  "fetchError": "Beim Abrufen der Projektdaten ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+  "fetchFailed": "Projektdaten konnten nicht abgerufen werden",
+  "notArray": "Projektdaten sind kein Array",
+  "displayError": "Die Elemente zur Anzeige der Projekte wurden nicht gefunden."
+}
