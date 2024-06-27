@@ -42,7 +42,7 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse text-secondary py-3" aria-labelledby="headingOne" data-bs-parent="#accordion">
           <div class="accordion-body">
-            <div id="ProjectCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5 pb-5">
+            <div id="ProjectCards" class="row row-cols-1 row-cols-md-2 row-cols-lg-3  g-5 pb-5">
               <!-- Cards are created in project.ts data is in projects.json -->
             </div>
             <iframe src="../BE18-CR5-NetusilThomas/" name="content" width="100%" height="750px" style="box-shadow: 0 15px 35px gray" title="Frontend Webdev Projects"></iframe>
@@ -144,7 +144,7 @@
                         
                         <!-- Form submit button -->
                         <div class="d-grid">
-                            <button class="btn btn-outline-dark text-secondary btn-lg" type="submit"><?= htmlspecialchars(SUBMIT) ?></button>
+                            <button class="btn btn-outline-secondary text-secondary btn-lg" type="submit"><?= htmlspecialchars(SUBMIT) ?></button>
                         </div>
                     </form>
                 </div>
