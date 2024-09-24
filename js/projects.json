@@ -70,5 +70,17 @@
     "description_detail_es": "Crea una plataforma de adopción de animales para conectar a usuarios y animales. Todos los usuarios deben introducir su nombre, apellido, correo electrónico, número de teléfono, dirección, foto y contraseña para registrarse.",
     "image": "adoptAPet.png",
     "link": "BE18-CR5-NetusilThomas/"
+  },
+  {
+    "name": "Galerie Ariadne",
+    "technics": "PHP / MySQL",
+    "description_short_en": "",
+    "description_short_de": "",
+    "description_short_es": "",
+    "description_detail_en": "The page of the gallery Ariadne was created in 2001, now I have made some changes so that it works with current PHP and MySQL. The design was left untouched.",
+    "description_detail_de": "Die Seite der Galerie Ariadne programmierte ich bereits im Jahr 2001, nun habe ich die anpassungen vorgenommen, damit sie mit aktuellem PHP und MySQL arbeitet. Das Design blieb dabei unangetastet.",
+    "description_detail_es": "La página de la galería Ariadne fue creada en 2001, ahora hago algunas modificaciones para que funcione con PHP y MySQL. El disenño se mantuvo intacto.",
+    "image": "ariadne.png",
+    "link": "ariadne.at/"
   }
 ]

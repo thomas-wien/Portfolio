@@ -9,35 +9,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchProjects = exports.Project = void 0;
+exports.Project = void 0;
+exports.fetchProjects = fetchProjects;
 // Define external link
 const extLink = "http://thomas.ariadne.at";
 // Localization class
 class Localization {
     static loadTexts(lang) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield fetch(`./js/texts_${lang}.json`);
-                if (!response.ok) {
-                    throw new Error(`Failed to load texts for language ${lang}`);
-                }
-                this.loadedTexts = yield response.json();
-            }
-            catch (error) {
-                console.error('Error loading texts:', error);
+            const [error, response] = yield safeAsync(fetch(`./js/texts_${lang}.json`));
+            if (error || !response || !response.ok) {
+                console.warn(`Failed to load texts for language ${lang}`);
                 this.loadedTexts = {};
+                return;
             }
+            this.loadedTexts = yield response.json();
         });
     }
     static getCurrentLanguage() {
-        const htmlLang = document.documentElement.lang;
-        return htmlLang || 'en';
+        return document.documentElement.lang || 'en';
     }
     static getText(key) {
         return this.loadedTexts[key] || '';
     }
 }
 Localization.loadedTexts = {};
+// Utility function to safely handle async functions
+function safeAsync(promise) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const result = yield promise;
+            return [null, result];
+        }
+        catch (error) {
+            return [error, null];
+        }
+    });
+}
 // Project class
 class Project {
     constructor(name, technics, description_short, description_detail, image, link) {
@@ -47,7 +55,6 @@ class Project {
         this.description_detail = description_detail;
         this.image = image;
         this.link = link;
-        fetchProjects;
         this.image = Project.constructImageUrl(image);
         this.link = Project.constructLinkUrl(link);
     }
@@ -89,38 +96,35 @@ Project.allProjects = [];
 // Fetch and display projects
 function fetchProjects() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch('./js/projects.json');
-            if (!response.ok) {
-                throw new Error(Localization.getText('fetchFailed'));
-            }
-            const projectsData = yield response.json();
-            if (!Array.isArray(projectsData)) {
-                throw new Error(Localization.getText('notArray'));
-            }
-            const lang = Localization.getCurrentLanguage();
-            yield Localization.loadTexts(lang);
-            const shortDescKey = `description_short_${lang}`;
-            const detailDescKey = `description_detail_${lang}`;
-            projectsData.forEach(projectData => {
-                const project = new Project(projectData.name, projectData.technics, projectData[shortDescKey] || projectData.description_short_en, projectData[detailDescKey] || projectData.description_detail_en, projectData.image, projectData.link);
-                Project.addProject(project);
-            });
-            displayProjects();
-        }
-        catch (error) {
-            console.error('Error fetching projects data:', error);
+        const [fetchError, response] = yield safeAsync(fetch('./js/projects.json'));
+        if (fetchError || !response || !response.ok) {
+            console.error('Failed to fetch projects data');
             alert(Localization.getText('fetchError'));
+            return;
         }
+        const [jsonError, projectsData] = yield safeAsync(response.json());
+        if (jsonError || !Array.isArray(projectsData)) {
+            console.error('Projects data is not an array');
+            alert(Localization.getText('notArray'));
+            return;
+        }
+        const lang = Localization.getCurrentLanguage();
+        yield Localization.loadTexts(lang);
+        const shortDescKey = `description_short_${lang}`;
+        const detailDescKey = `description_detail_${lang}`;
+        projectsData.forEach(projectData => {
+            const project = new Project(projectData.name, projectData.technics, projectData[shortDescKey] || projectData.description_short_en, projectData[detailDescKey] || projectData.description_detail_en, projectData.image, projectData.link);
+            Project.addProject(project);
+        });
+        displayProjects();
     });
 }
-exports.fetchProjects = fetchProjects;
 // Display projects
 function displayProjects() {
     const resultcards = document.getElementById("ProjectCards");
     const resultbuttons = document.getElementById("ProjectButtons");
     if (!resultcards || !resultbuttons) {
-        console.error(Localization.getText('displayError'));
+        console.error('Project cards or buttons container not found');
         return;
     }
     const cardsHtml = Project.allProjects.map(project => Project.createProjectCard(project)).join('');

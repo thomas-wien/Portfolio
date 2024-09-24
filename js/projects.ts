@@ -21,25 +21,31 @@ class Localization {
   private static loadedTexts: { [key: string]: string } = {};
 
   static async loadTexts(lang: string): Promise<void> {
-    try {
-      const response = await fetch(`./js/texts_${lang}.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to load texts for language ${lang}`);
-      }
-      this.loadedTexts = await response.json();
-    } catch (error) {
-      console.error('Error loading texts:', error);
+    const [error, response] = await safeAsync(fetch(`./js/texts_${lang}.json`));
+    if (error || !response || !response.ok) {
+      console.warn(`Failed to load texts for language ${lang}`);
       this.loadedTexts = {};
+      return;
     }
+    this.loadedTexts = await response.json();
   }
 
   static getCurrentLanguage(): string {
-    const htmlLang = document.documentElement.lang;
-    return htmlLang || 'en';
+    return document.documentElement.lang || 'en';
   }
 
   static getText(key: keyof typeof Localization.loadedTexts): string {
     return this.loadedTexts[key] || '';
+  }
+}
+
+// Utility function to safely handle async functions
+async function safeAsync<T>(promise: Promise<T>): Promise<[Error | null, T | null]> {
+  try {
+    const result = await promise;
+    return [null, result];
+  } catch (error) {
+    return [error as Error, null];
   }
 }
 
@@ -53,7 +59,6 @@ export class Project {
     public image: string,
     public link: string
   ) {
-    fetchProjects
     this.image = Project.constructImageUrl(image);
     this.link = Project.constructLinkUrl(link);
   }
@@ -100,49 +105,49 @@ export class Project {
 
 // Fetch and display projects
 export async function fetchProjects(): Promise<void> {
-  try {
-    const response = await fetch('./js/projects.json');
-    if (!response.ok) {
-      throw new Error(Localization.getText('fetchFailed'));
-    }
-    const projectsData: IProject[] = await response.json();
+  const [fetchError, response] = await safeAsync(fetch('./js/projects.json'));
 
-    if (!Array.isArray(projectsData)) {
-      throw new Error(Localization.getText('notArray'));
-    }
-
-    const lang = Localization.getCurrentLanguage();
-    await Localization.loadTexts(lang);
-
-    const shortDescKey = `description_short_${lang}` as keyof IProject;
-    const detailDescKey = `description_detail_${lang}` as keyof IProject;
-
-    projectsData.forEach(projectData => {
-      const project = new Project(
-        projectData.name,
-        projectData.technics,
-        projectData[shortDescKey] || projectData.description_short_en,
-        projectData[detailDescKey] || projectData.description_detail_en,
-        projectData.image,
-        projectData.link
-      );
-      Project.addProject(project);
-    });
-
-    displayProjects();
-  } catch (error) {
-    console.error('Error fetching projects data:', error);
+  if (fetchError || !response || !response.ok) {
+    console.error('Failed to fetch projects data');
     alert(Localization.getText('fetchError'));
+    return;
   }
+
+  const [jsonError, projectsData] = await safeAsync(response.json());
+  if (jsonError || !Array.isArray(projectsData)) {
+    console.error('Projects data is not an array');
+    alert(Localization.getText('notArray'));
+    return;
+  }
+
+  const lang = Localization.getCurrentLanguage();
+  await Localization.loadTexts(lang);
+
+  const shortDescKey = `description_short_${lang}` as keyof IProject;
+  const detailDescKey = `description_detail_${lang}` as keyof IProject;
+
+  projectsData.forEach(projectData => {
+    const project = new Project(
+      projectData.name,
+      projectData.technics,
+      projectData[shortDescKey] || projectData.description_short_en,
+      projectData[detailDescKey] || projectData.description_detail_en,
+      projectData.image,
+      projectData.link
+    );
+    Project.addProject(project);
+  });
+
+  displayProjects();
 }
 
 // Display projects
 function displayProjects(): void {
-  const resultcards = document.getElementById("ProjectCards") as HTMLElement | null;
-  const resultbuttons = document.getElementById("ProjectButtons") as HTMLElement | null;
+  const resultcards = document.getElementById("ProjectCards");
+  const resultbuttons = document.getElementById("ProjectButtons");
 
   if (!resultcards || !resultbuttons) {
-    console.error(Localization.getText('displayError'));
+    console.error('Project cards or buttons container not found');
     return;
   }
 

@@ -35,7 +35,7 @@ if ($sprache == "en") {
   define("GITHUB_FOOTER_EXTERNAL","en el pie de cada página hay un enlace al repositorio de github del proyecto");
   define("CERTIFICATES","Certificados y testimonios (selección)");
   define("SKILLS", "mis habilidades (Profesional y social)");
-  define("CONTACT","Para más información, no dude en contactarme");
+  define("CONTACT","Para más información, no dude en contactar me");
   define("NAME", "nombre");
   define("EMAIL", "email");
   define("MESSAGE", "mensaje");

@@ -9,21 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.displaySkills = exports.fetchSkills = exports.Skill = void 0;
+exports.Skill = void 0;
+exports.fetchSkills = fetchSkills;
+exports.displaySkills = displaySkills;
 // Define the place in the HTML document where the skills will be shown
 const resultskills = document.getElementById("SkillsProgressCircles");
 /**
  * Represents a skill with its properties and functionalities.
  */
 class Skill {
-    /**
-     * Creates a new instance of the Skill class.
-     *
-     * @param {string} name - The name of the skill.
-     * @param {string} cssname - The CSS name of the skill.
-     * @param {boolean} hardOrSoft - Indicates whether the skill is a hard skill or a soft skill.
-     * @param {SkillType} skillType - The type of the skill.
-     */
     constructor(name, cssname, hardOrSoft, skillType) {
         this.name = name;
         this.cssname = cssname;
@@ -31,38 +25,31 @@ class Skill {
         this.skillType = skillType;
     }
     /**
-   * Adds a new skill to the array of all skills.
-   * @param {Skill} skill - The skill instance to be added.
-   */
+     * Adds a new skill to the array of all skills.
+     */
     static addSkill(skill) {
         Skill.allSkills.push(skill);
     }
     /**
-     * Retrieves skills filtered by their type (frontend, backend, soft skills).
-     * @param {SkillType} type - The type of skills to retrieve.
-     * @returns {Skill[]} An array of skills filtered by the specified type.
+     * Retrieves skills filtered by their type.
      */
     static getSkillsByType(type) {
         return Skill.allSkills.filter(skill => skill.skillType === type);
     }
     /**
-     * Create the Skill Group Head depending on the SkillType
-     * @param {SkillType} skillType - The type of skill for the group head.
-     * @returns {string} HTML markup for the skill group head.
+     * Creates the skill group header based on skill type.
      */
     static createSkillGroupHead(skillType) {
         return `<h3 class="bg-dark text-success w-100 text-center"><strong>${skillType}</strong></h3>`;
     }
     /**
      * Creates HTML markup for a skill progress circle.
-     * @param {Skill} skill - The skill instance.
-     * @returns {string} HTML markup for the skill progress circle.
      */
     static createSkillCircle(skill) {
         return `
       <div class="progressbar mx-auto">
         <svg class="progressbar__svg">
-          <circle cx="80" cy="80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"></circle>
+          <circle cx="80" cy "80" r="70" class="progressbar__svg-circle circle-${skill.cssname} shadow-${skill.cssname}"></circle>
         </svg>
         <span class="progressbar__text shadow-${skill.cssname}">${skill.name}</span>
       </div>
@@ -73,43 +60,50 @@ exports.Skill = Skill;
 /** An array to hold all skills. */
 Skill.allSkills = [];
 /**
- * Fetches skills data from a JSON file and displays it on the webpage.
- * If an error occurs during fetching, an alert is displayed.
+ * Safe async function to handle errors and responses gracefully.
  */
-function fetchSkills() {
+function safeAsync(promise) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch('./js/skills.json');
-            if (!response.ok) {
-                throw new Error(`Failed to fetch skills data: ${response.statusText}`);
-            }
-            const skillsData = yield response.json();
-            // Type check for JSON data
-            if (!Array.isArray(skillsData)) {
-                throw new Error('Skills data is not an array');
-            }
-            skillsData.forEach(skillData => {
-                if (isValidSkill(skillData)) {
-                    const skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
-                    Skill.addSkill(skill);
-                }
-                else {
-                    console.warn('Invalid skill data:', skillData);
-                }
-            });
-            displaySkills();
+            const result = yield promise;
+            return [null, result];
         }
         catch (error) {
-            console.error('Error fetching skills:', error);
-            alert('An error occurred while fetching the skills data. Please try again later.');
+            return [error, null];
         }
     });
 }
-exports.fetchSkills = fetchSkills;
+/**
+ * Fetches skills data from a JSON file and displays it on the webpage.
+ */
+function fetchSkills() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const [error, response] = yield safeAsync(fetch('./js/skills.json'));
+        if (error || !(response === null || response === void 0 ? void 0 : response.ok)) {
+            console.error('Failed to fetch skills data:', error || (response === null || response === void 0 ? void 0 : response.statusText));
+            alert('An error occurred while fetching the skills data. Please try again later.');
+            return;
+        }
+        const [parseError, skillsData] = yield safeAsync(response.json());
+        if (parseError || !Array.isArray(skillsData)) {
+            console.error('Skills data is invalid:', parseError);
+            alert('Skills data is not valid.');
+            return;
+        }
+        skillsData.forEach(skillData => {
+            if (isValidSkill(skillData)) {
+                const skill = new Skill(skillData.name, skillData.cssname, skillData.hardOrSoft, skillData.skillType);
+                Skill.addSkill(skill);
+            }
+            else {
+                console.warn('Invalid skill data:', skillData);
+            }
+        });
+        displaySkills();
+    });
+}
 /**
  * Checks if the provided data object is a valid skill.
- * @param {any} data - The data object to be validated.
- * @returns {boolean} True if the data object is a valid skill, otherwise false.
  */
 function isValidSkill(data) {
     return typeof data.name === 'string' &&
@@ -121,7 +115,6 @@ function isValidSkill(data) {
 }
 /**
  * Displays the fetched skills on the webpage.
- * If the necessary element is not found, an error is logged.
  */
 function displaySkills() {
     if (!resultskills) {
@@ -133,13 +126,12 @@ function displaySkills() {
         const skillGroupHead = Skill.createSkillGroupHead(type);
         skillHtml.push(skillGroupHead);
         const filteredSkills = Skill.getSkillsByType(type);
-        filteredSkills.forEach((val) => {
+        filteredSkills.forEach(val => {
             skillHtml.push(Skill.createSkillCircle(val));
         });
     });
     resultskills.innerHTML = skillHtml.join('');
 }
-exports.displaySkills = displaySkills;
 /** Fetch and display skills when the page loads */
 window.onload = function () {
     fetchSkills();
